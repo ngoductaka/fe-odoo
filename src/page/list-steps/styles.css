@@ -1,0 +1,24 @@
+.wrapper-steps {
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: space-around; */
+}
+.item-step {
+    background-color: #1d70bc;
+    width: 22vw;
+    cursor: pointer;
+
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 500;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    /* margin: 10px 0px; */
+    align-self: stretch;
+    margin: 1.5vw 0px;
+}
+.inactive {
+    opacity: 0.8;
+    cursor: not-allowed;
+}

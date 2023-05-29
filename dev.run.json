@@ -1,0 +1,9 @@
+{
+    "apps": [
+        {
+            "name": "wms-india-fe-3105",
+            "script": "npm",
+            "args": "run start"
+        }
+    ]
+}

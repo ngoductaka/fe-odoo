@@ -1,0 +1,131 @@
+{
+    "3e": {
+        "1": [
+            {
+                "id": "6360e59f2564502eb64f3cf2",
+                "rfid": "6360e59f2564502eb64f3cf2",
+                "ge_no": "wewe",
+                "itemcode": "PSM0097",
+                "product_category": "HIV",
+                "sub_category": "HIV",
+                "type_name": "Tube",
+                "material_name": "20 UL Capillary tube (50 EA/PK)",
+                "lot": "1",
+                "receivied_qty": 12,
+                "cartons_beans": 3,
+                "carton_size": 12,
+                "stock_in_warehouse": 12,
+                "index_item": "1/3",
+                "location": "1"
+            },
+            {
+                "id": "6360e59fd435030f713abba9",
+                "rfid": "6360e59fd435030f713abba9",
+                "ge_no": "wewe",
+                "itemcode": "PSM0097",
+                "product_category": "HIV",
+                "sub_category": "HIV",
+                "type_name": "Tube",
+                "material_name": "20 UL Capillary tube (50 EA/PK)",
+                "lot": "1",
+                "receivied_qty": 12,
+                "cartons_beans": 3,
+                "carton_size": 12,
+                "stock_in_warehouse": 12,
+                "index_item": "2/3",
+                "location": "1"
+            },
+            {
+                "id": "6360e59f25f0b82df6248a75",
+                "rfid": "6360e59f25f0b82df6248a75",
+                "ge_no": "wewe",
+                "itemcode": "PSM0097",
+                "product_category": "HIV",
+                "sub_category": "HIV",
+                "type_name": "Tube",
+                "material_name": "20 UL Capillary tube (50 EA/PK)",
+                "lot": "1",
+                "receivied_qty": 11,
+                "cartons_beans": 3,
+                "carton_size": 12,
+                "stock_in_warehouse": "5",
+                "index_item": "3/3",
+                "location": "1"
+            },
+            {
+                "id": "6360e5ba7d0dfa2ff866c3c7",
+                "rfid": "6360e5ba7d0dfa2ff866c3c7",
+                "ge_no": "wewe",
+                "itemcode": "PSM0097",
+                "product_category": "HIV",
+                "sub_category": "HIV",
+                "type_name": "Tube",
+                "material_name": "20 UL Capillary tube (50 EA/PK)",
+                "lot": "1",
+                "receivied_qty": 11,
+                "cartons_beans": 3,
+                "carton_size": 12,
+                "stock_in_warehouse": "6",
+                "index_item": "3/3",
+                "location": "1"
+            }
+        ],
+        "12": [
+            {
+                "id": "6364cbbabae65607b2ec56e8",
+                "rfid": "6364cbbabae65607b2ec56e8",
+                "ge_no": "ge2",
+                "itemcode": "PSM0098",
+                "product_category": "FIA",
+                "sub_category": "HVC",
+                "type_name": "Inner",
+                "material_name": "Inner Box STANDARD Q  For HIV 1/2 Ab (5 test)",
+                "lot": "12",
+                "artwork": "12",
+                "receivied_qty": 34,
+                "cartons_beans": 3,
+                "carton_size": 34,
+                "stock_in_warehouse": 34,
+                "index_item": "1/3",
+                "location": "1"
+            },
+            {
+                "id": "6364cbba2fb18a0f2fb55538",
+                "rfid": "6364cbba2fb18a0f2fb55538",
+                "ge_no": "ge2",
+                "itemcode": "PSM0098",
+                "product_category": "FIA",
+                "sub_category": "HVC",
+                "type_name": "Inner",
+                "material_name": "Inner Box STANDARD Q  For HIV 1/2 Ab (5 test)",
+                "lot": "13",
+                "artwork": "12",
+                "receivied_qty": 34,
+                "cartons_beans": 3,
+                "carton_size": 34,
+                "stock_in_warehouse": 34,
+                "index_item": "2/3",
+                "location": "1"
+            }
+        ],
+        "lot 3": [
+            {
+                "id": "6364d99f8af2f1b0ec880aee",
+                "rfid": "6364d99f8af2f1b0ec880aee",
+                "ge_no": "ge",
+                "itemcode": "PSM0097",
+                "product_category": "HIV",
+                "sub_category": "HIV",
+                "type_name": "Tube",
+                "material_name": "20 UL Capillary tube (50 EA/PK)",
+                "lot": "lot 3",
+                "receivied_qty": 17,
+                "cartons_beans": 6,
+                "carton_size": 17,
+                "stock_in_warehouse": 17,
+                "index_item": "1/6",
+                "location": "1"
+            }
+        ]
+    }
+}
