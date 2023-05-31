@@ -33,12 +33,13 @@ const App = () => {
       }
 
       const dataUpload = form.getFieldValue();
-      const { lot_number, rfid } = dataUpload;
-      const stringRfid = hex2a(rfid.trim().split(/\W/).join(''));
+      const { id, barcode } = dataUpload;
+      const stringRfid = barcode.trim().split(/\W/).join('');
       const rfidList = removeDuplicates(stringRfid.cordwood(12)).filter(i => i.length === 12)
 
-      const { data } = await apiClientMongo.post('box-material/details', {
-        boxIds: rfidList,
+      const { data } = await axios.post('http://localhost:3909/map', {
+        "location": id,
+        "barCode": rfidList
       });
 
       openNotificationWithIcon('success', "show rfid success")
@@ -52,24 +53,16 @@ const App = () => {
       <GeneralHeader title='Scan box information' />
       <div style={{ padding: 10 }}>
         <Form form={form} >
-          <Form.Item name={'rfid'} key={'rfid'} style={{ marginTop: 10, marginBottom: 0 }}>
-            <Input.TextArea style={{ height: '20vh' }} allowClear autocomplete="off" autoComplete={false}
-              placeholder='List Rfid ' />
+          <Form.Item name={'id'} key={'id'} style={{ marginTop: 10, marginBottom: 0 }}>
+            <Input.TextArea
+             style={{ height: '10vh' }} allowClear autocomplete="off" autoComplete={false}
+              placeholder='Location id ' />
+          </Form.Item>
+          <Form.Item name={'barcode'} key={'barcode'} style={{ marginTop: 30, marginBottom: 0 }}>
+            <Input.TextArea style={{ height: '30vh' }} allowClear autocomplete="off" autoComplete={false}
+              placeholder='List bar code ' />
           </Form.Item>
         </Form>
-        {dataBox && dataBox[0] && <h3>Box information</h3>}
-        {
-          dataBox.map(item => (
-            <div style={{ marginTop: 8, border: '1px solid #ddd', borderRadius: 9, padding: '10px 15px' }}>
-              {Object.keys(listKeyMap).map(
-                key => <div style={{ display: 'flex' }}>
-                  <div style={{ fontWeight: '500', }}>{listKeyMap[key]}:</div>
-                  <div>{item[key]}</div>
-                </div>
-              )}
-            </div>
-          ))
-        }
         <Button onClick={() => {
           const dataUpload = Object.values(form.getFieldValue()).filter(i => !!i);
           if (!isEmpty(dataUpload)) {

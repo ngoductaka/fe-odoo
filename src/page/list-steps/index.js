@@ -59,7 +59,11 @@ const App = () => {
             <div className="h-screen bg-gray-100 p-4">
                 <div className='h-full bg-white p-4 rounded-md'>
                     <div className=' mb-4 flex justify-between' >
-                        <Input.Search style={{ width: 400 }} />
+                        <div className='flex justify-between flex-1'>
+                            <h5>물류 센터</h5>
+                            <Input.Search style={{ width: 600 }} />
+                            <div />
+                        </div>
                         <div>
                             <Button className='flex items-center justify-center'> <ArrowDownOutlined /> 다운로드</Button>
                             <Button icon={<PrinterOutlined />}>인쇄기</Button>

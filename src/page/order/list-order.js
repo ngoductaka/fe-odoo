@@ -11,7 +11,11 @@ const App = () => {
             <div className="h-screen bg-gray-100 p-4">
                 <div className='h-full bg-white p-4 rounded-md'>
                     <div className=' mb-4 flex justify-between' >
-                        <Input.Search style={{ width: 400 }} />
+                        <div className='flex justify-between flex-1'>
+                            <h5>제품</h5>
+                            <Input.Search style={{ width: 600 }} />
+                            <div />
+                        </div>
                         <div>
                             <Button style={{ background: '#3A5BB8', color: '#fff' }}> 데이터를 얻다</Button>
                             <Button className='mr-2 ml-2'> <ArrowDownOutlined /> 다운로드</Button>
