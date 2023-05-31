@@ -102,7 +102,7 @@ const RenderMap = React.memo(({ data: areaData, onOkModal }) => {
             //         'D10400030': 10,
             //     },
             // }
-            const { data } = await axios.get('http://localhost:3909/map')
+            const { data } = await axios.get('http://172.174.226.12:3909/map')
 
 
             setLocation(data || {});

@@ -10,7 +10,7 @@ import { dataMaterial } from 'assets/data/material';
 const App = () => {
     const [data, setData] = useState([]);
     const getData = async () => {
-        const { data } = await axios.get('http://localhost:3909/map');
+        const { data } = await axios.get('http://172.174.226.12:3909/map');
         const mapObj = {};
         Object.keys(data).map(lo => {
             Object.keys(data[lo]).map(ma => {

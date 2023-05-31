@@ -37,7 +37,7 @@ const App = () => {
       const stringRfid = barcode.trim().split(/\W/).join('');
       const rfidList = removeDuplicates(stringRfid.cordwood(12)).filter(i => i.length === 12)
 
-      const { data } = await axios.post('http://localhost:3909/map', {
+      const { data } = await axios.post('http://172.174.226.12:3909/map', {
         "location": id,
         "barCode": rfidList
       });
