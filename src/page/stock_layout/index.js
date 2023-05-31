@@ -185,7 +185,13 @@ const RenderMap = React.memo(({ data: areaData, onOkModal }) => {
 
     useEffect(() => {
         getLocation();
-        return () => setSelect(false);
+        const interval = setInterval(() => {
+            getLocation();
+        }, 1000*5)
+        return () => {
+            clearInterval(interval);
+            setSelect(false)
+        };
     }, []);
 
     useEffect(() => form.resetFields(), [form]);
