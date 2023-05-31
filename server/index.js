@@ -68,17 +68,17 @@ app.post(
             const dataConvert = newItem.barCode.reduce((cal, cur) => {
                 const material = allMaterial.find(i => i.id === cur);
                 if (material)
-                    cal[material.material] = cal[material.material] ? cal[material.material] + 1 : 1
+                    cal[material.material] = cal[material.material] ? [...(new Set([...cal[material.material], cur]))] : [cur]
                 return cal;
             }, {});
             const dataSave = oldLocation;
 
             if (oldLocation[newItem.location]) {
                 Object.keys(dataConvert).map(key => {
-                    if(oldLocation[newItem.location][key]) {
-                        oldLocation[newItem.location][key] = dataConvert[key] + oldLocation[newItem.location][key];
+                    if (oldLocation[newItem.location][key]) {
+                        oldLocation[newItem.location][key] = [...(new Set([...dataConvert[key], ...oldLocation[newItem.location][key]]))];
                     } else {
-                        oldLocation[newItem.location][key] =  dataConvert[key];
+                        oldLocation[newItem.location][key] = dataConvert[key];
                     }
                 })
 

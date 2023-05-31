@@ -1,10 +1,60 @@
-import React, { useMemo } from 'react';
-import { Button, Input, Table } from 'antd';
+import React, { useEffect, useMemo, useState } from 'react';
+import { Button, Input, Table, Tag } from 'antd';
 import { ArrowRightOutlined, ArrowLeftOutlined, ArrowDownOutlined, PrinterOutlined } from '@ant-design/icons';
 import { GeneralHeader } from 'com/app_layout/general_header';
 import { TableCustom } from 'com/table_temp/helper/styled_component';
+import axios from 'axios';
+import { dataMaterial } from 'assets/data/material';
+
 
 const App = () => {
+    const [data, setData] = useState([]);
+    const getData = async () => {
+        const { data } = await axios.get('http://localhost:3909/map');
+        const mapObj = {};
+        Object.keys(data).map(lo => {
+            Object.keys(data[lo]).map(ma => {
+                data[lo][ma].map(i => {
+                    mapObj[i] = lo;
+                })
+            })
+        })
+        const mapLocation = ['지역 A'
+            , "지역 B"
+            , 'BU 지역']
+        setData(dataMaterial.map((i, index) => {
+            const dataIndex = mapObj[i.id];
+            let lo = '';
+            if (dataIndex) {
+                const [index, position] = dataIndex.split('-')
+                lo = mapLocation[index - 1] + '-' + position;
+            }
+            return {
+                key: index + 1,
+                stt: index + 1,
+                Name_of_NVL: 'ASF1' + index,
+                ERP: i.material,
+                barcode: i.id,
+                TK: 'WH/IN/01' + index,
+                divide: '재료',
+                situation: '준비가 된',
+                dry: i.count,
+                location: lo
+            }
+        }))
+
+    }
+
+    useEffect(() => {
+        getData();
+        const interval = setInterval(() => {
+            getData();
+        }, 1000 * 5);
+        return () => {
+            clearInterval(interval)
+        }
+    }, [])
+
     return (
         <div>
             <GeneralHeader title='Process flow​' />
@@ -22,7 +72,7 @@ const App = () => {
                             <Button icon={<PrinterOutlined />}>인쇄기</Button>
                         </div>
                     </div>
-                    <TableCustom dataSource={dataSource} columns={columns} />;
+                    <TableCustom dataSource={data} columns={columns} />;
                 </div>
             </div>
         </div>
@@ -113,5 +163,11 @@ const columns = [
         dataIndex: 'dry',
         key: 'dry',
         // render: () => <img src={images.barcode} />
+    },
+    {
+        title: '위치',
+        dataIndex: 'location',
+        key: 'location',
+        render: (val) => val ? <Tag color='success'> {val}</Tag> : <Tag color='error'> N/A </Tag>
     },
 ];

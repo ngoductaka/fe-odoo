@@ -298,7 +298,7 @@ const RenderMap = React.memo(({ data: areaData, onOkModal }) => {
                                                     Name
                                                 </div>
                                                 <div>
-                                                    Count
+                                                    Box Qty
                                                 </div>
                                             </div>
                                             {Object.keys(dataItem).map(key => {
@@ -307,9 +307,11 @@ const RenderMap = React.memo(({ data: areaData, onOkModal }) => {
                                                         <Tag color="cyan" style={{ fontSize: '1.1em', fontWeight: '500' }}>
                                                             {key}
                                                         </Tag>
+                                                        <Popover title={dataItem[key].join(',')}>
                                                         <Tag>
-                                                            {dataItem[key]}
+                                                            {dataItem[key].length}
                                                         </Tag>
+                                                        </Popover>
                                                     </div>
                                                 )
                                             })}

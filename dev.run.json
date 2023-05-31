@@ -1,7 +1,7 @@
 {
     "apps": [
         {
-            "name": "wms-india-fe-3105",
+            "name": "anyone 3107",
             "script": "npm",
             "args": "run start"
         }
