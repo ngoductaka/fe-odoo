@@ -20,16 +20,17 @@ app.use(bodyParser.json())
 const port = 3909;
 
 const read = async () => {
-    const data = await fs.readFile('./data.json', 'utf-8');
+    console.log('dddd===', path.resolve('./data.json'))
+    const data = await fs.readFile(path.resolve('./data.json'), 'utf-8');
     return JSON.parse(data);
 }
 const readMaterial = async () => {
-    const data = await fs.readFile('./material.json', 'utf-8');
+    const data = await fs.readFile(path.resolve('./material.json'), 'utf-8');
     return JSON.parse(data);
 }
 
 const update = async input => {
-    await fs.writeFile('./data.json', JSON.stringify(input, null, 4));
+    await fs.writeFile(path.resolve('./data.json'), JSON.stringify(input, null, 4));
 }
 
 
@@ -112,5 +113,5 @@ app.get(
     }
 );
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
+    console.log(`Example ==== listening at http://localhost:${port}`)
 })
