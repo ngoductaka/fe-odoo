@@ -112,6 +112,12 @@ app.get(
         }
     }
 );
+app.get('/download/:file', function(req, res){
+    const file = `${__dirname}/${req.params.file}`;
+    res.download(file); // Set disposition and send it.
+  });
+//   http://localhost:3909/download/report1.xlsx
+  
 app.listen(port, () => {
     console.log(`Example ==== listening at http://localhost:${port}`)
 })

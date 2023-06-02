@@ -50,17 +50,17 @@ const App = () => {
   }
   return (
     <>
-      <GeneralHeader title='Scan box information' />
+    <h1 className='text-center font-bold text-xl'>Scanner input</h1>
       <div style={{ padding: 10 }}>
         <Form form={form} >
           <Form.Item name={'id'} key={'id'} style={{ marginTop: 10, marginBottom: 0 }}>
             <Input.TextArea
              style={{ height: '10vh' }} allowClear autocomplete="off" autoComplete={false}
-              placeholder='Location id ' />
+              placeholder='Location id ex:1-001' />
           </Form.Item>
           <Form.Item name={'barcode'} key={'barcode'} style={{ marginTop: 30, marginBottom: 0 }}>
             <Input.TextArea style={{ height: '30vh' }} allowClear autocomplete="off" autoComplete={false}
-              placeholder='List bar code ' />
+              placeholder='List bar code (12 characters) ex: D10400003000' />
           </Form.Item>
         </Form>
         <Button onClick={() => {

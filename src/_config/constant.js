@@ -16,6 +16,7 @@ export const ENDPOINT = {
 
 export const MONGO_SERVER = 'https://india.rosoee.com:3201/v1'
 export const MONGO_SERVER_1 = 'http://20.115.75.139:3200/v1'
+export const LOCAL = `http://${window.location.host.split(':')[0]}:3909`;
 // export const MONGO_SERVER = 'http://localhost:3200/v1'
 
 export const map_color = {

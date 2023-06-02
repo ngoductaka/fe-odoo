@@ -1,8 +1,16 @@
 import React, { useMemo } from 'react';
-import { Button, Input, Table, Tabs } from 'antd';
+import { Button, DatePicker, Input, Table, Tabs } from 'antd';
 import { ArrowRightOutlined, ArrowLeftOutlined, ArrowDownOutlined, PrinterOutlined } from '@ant-design/icons';
 import { GeneralHeader } from 'com/app_layout/general_header';
 import { TableCustom } from 'com/table_temp/helper/styled_component';
+import { LOCAL } from '_config/constant';
+import moment from 'moment';
+import PieChart from './chart/pie';
+import LineChart from './chart/line';
+import PerChart from './chart/per';
+import ColChart from './chart/col';
+import ChartDonut from './chart/donut';
+import ChartDonut2 from './chart/donut2';
 
 const Setting = () => {
     return (
@@ -18,7 +26,10 @@ const Setting = () => {
                 </Tabs.TabPane>
                 <Tabs.TabPane tab={<TabSpan text="Diary Report" />} key="2">
                     <Report2 />
+                </Tabs.TabPane>
 
+                <Tabs.TabPane tab={<TabSpan text="Chart" />} key="3">
+                    <Report3 />
                 </Tabs.TabPane>
 
             </Tabs>
@@ -30,6 +41,36 @@ const Setting = () => {
 const TabSpan = ({ text }) => <span style={{ textTransform: 'capitalize' }}>{text}</span>
 export default Setting;
 
+const Report3 = () => {
+    return (
+        <div>
+        <div className='flex'>
+            <div className='flex-1'>
+                <ChartDonut />
+            </div>
+            <div className='flex-1'>
+                <ChartDonut2 />
+            </div>
+        </div>
+        <div className='flex'>
+            <div className='flex-1'>
+                <PerChart />
+            </div>
+            <div className='flex-1'>
+                <ColChart />
+            </div>
+        </div>
+        <div className='flex'>
+            <div className='flex-1'>
+                <PieChart />
+            </div>
+            <div className='flex-1'>
+                <LineChart />
+            </div>
+        </div>
+        </div>
+    )
+}
 
 const Report1 = () => {
     return (
@@ -43,18 +84,18 @@ const Report1 = () => {
                     </div>
                     <div>
                         <Button style={{ background: '#3A5BB8', color: '#fff' }}> 데이터를 얻다</Button>
-                        <Button className='mr-2 ml-2'> <ArrowDownOutlined /> 다운로드</Button>
-                        <Button icon={<PrinterOutlined />}>인쇄기</Button>
+                        <a href={`${LOCAL}/download/report1.xlsx`} download><Button className='mr-2 ml-2'> <ArrowDownOutlined /> 다운로드</Button></a>
+                        <a href={`${LOCAL}/download/report1.xlsx`} download><Button icon={<PrinterOutlined />}>인쇄기</Button></a>
                     </div>
                 </div>
                 <h5>㈜누구나비나</h5>
                 <h6>Lô M, M-1, KCN Quế Võ (Khu vực mở rộng), Phường Nam Sơn, TP. Bắc Ninh, Tỉnh Bắc Ninh</h6>
                 <h6>㈜누구나비나: 2301029655 </h6>
-                <div className='flex justify-center'>판매 제품 수입 및 수출 보고서 (반제품 입/출/재고 보고서)</div>
-                <div className='flex justify-center'>
-                    <p>Từ ngày: 01/05/2023</p>
+                <div className='flex justify-center text-xl font-bold'>판매 제품 수입 및 수출 보고서 (반제품 입/출/재고 보고서)</div>
+                <div className='flex justify-center mt-3'>
+                    <p>From Date: <DatePicker defaultValue={moment().subtract(1, 'M')} /></p>
                     <div className='w-4' />
-                    <p>Đến ngày: 31/05/2023</p>
+                    <p>To Date: <DatePicker defaultValue={moment()} /></p>
                 </div>
 
                 <Table
@@ -205,18 +246,18 @@ const Report2 = () => {
                     </div>
                     <div>
                         <Button style={{ background: '#3A5BB8', color: '#fff' }}> 데이터를 얻다</Button>
-                        <Button className='mr-2 ml-2'> <ArrowDownOutlined /> 다운로드</Button>
-                        <Button icon={<PrinterOutlined />}>인쇄기</Button>
+                        <a href={`${LOCAL}/download/report2.xlsx`} download><Button className='mr-2 ml-2'> <ArrowDownOutlined /> 다운로드</Button> </a>
+                        <a href={`${LOCAL}/download/report2.xlsx`} download><Button icon={<PrinterOutlined />}>인쇄기</Button> </a>
                     </div>
                 </div>
                 <h5>㈜누구나비나</h5>
                 <h6>Lô M, M-1, KCN Quế Võ (Khu vực mở rộng), Phường Nam Sơn, TP. Bắc Ninh, Tỉnh Bắc Ninh</h6>
                 <h6>㈜누구나비나: 2301029655 </h6>
-                <div className='flex justify-center'>판매 제품 수입 및 수출 보고서 (반제품 입/출/재고 보고서)</div>
-                <div className='flex justify-center'>
-                    <p>Từ ngày: 01/05/2023</p>
+                <div className='flex justify-center text-xl font-bold'>판매 제품 수입 및 수출 보고서 (반제품 입/출/재고 보고서)</div>
+                <div className='flex justify-center mt-3'>
+                    <p>From Date: <DatePicker defaultValue={moment().subtract(1, 'M')} /></p>
                     <div className='w-4' />
-                    <p>Đến ngày: 31/05/2023</p>
+                    <p>To Date: <DatePicker defaultValue={moment()} /></p>
                 </div>
 
                 <Table

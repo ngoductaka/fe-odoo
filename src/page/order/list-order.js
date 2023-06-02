@@ -5,6 +5,7 @@ import { GeneralHeader } from 'com/app_layout/general_header';
 import { TableCustom } from 'com/table_temp/helper/styled_component';
 import axios from 'axios';
 import { dataMaterial } from 'assets/data/material';
+import { LOCAL } from '_config/constant';
 
 
 const App = () => {
@@ -68,8 +69,8 @@ const App = () => {
                         </div>
                         <div>
                             <Button style={{ background: '#3A5BB8', color: '#fff' }}> 데이터를 얻다</Button>
-                            <Button className='mr-2 ml-2'> <ArrowDownOutlined /> 다운로드</Button>
-                            <Button icon={<PrinterOutlined />}>인쇄기</Button>
+                            <a href={`${LOCAL}/download/report3.xlsx`} download><Button className='mr-2 ml-2'> <ArrowDownOutlined /> 다운로드</Button></a>
+                            <a href={`${LOCAL}/download/report3.xlsx`} download><Button icon={<PrinterOutlined />}>인쇄기</Button></a>
                         </div>
                     </div>
                     <TableCustom dataSource={data} columns={columns} />;

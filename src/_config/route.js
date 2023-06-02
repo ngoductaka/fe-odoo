@@ -57,7 +57,7 @@ export const ROUTES = {
     MACHINE_ANALYTIC: 'machine-analytic',
     PRODUCT_STATISTIC: 'statistics',
     SETTING: 'setting',
-    ACCOUNT: 'account',
+    REPORT: 'report',
     PROFILE: 'profile',
     listOut: 'list-stock-out',
     createOrder: 'create-order',
@@ -117,17 +117,10 @@ export const private_route = [
     //     hidden: true,
     // },
     {
-        path: `/${ROUTES.ACCOUNT}`,
+        path: `/${ROUTES.REPORT}`,
         Com: Account,
         exact: true,
         name: '구성',
-    },
-    {
-        path: `/${ROUTES.BoxInfor}`,
-        Com: BoxInfor,
-        exact: true,
-        name: 'Scan',
-        // hidden: true,
     },
 ];
 
@@ -200,5 +193,12 @@ export const public_route = [
     {
         path: `/${ROUTES.LOGIN}`,
         Com: Login,
+    },
+    {
+        path: `/${ROUTES.BoxInfor}`,
+        Com: BoxInfor,
+        exact: true,
+        name: 'Scan',
+        // hidden: true,
     },
 ];
