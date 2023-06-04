@@ -45,11 +45,11 @@ export const ROUTES = {
     // unAuth
     LOGIN: 'login',
     // auth
-    HOME: '',
+    HOME: 'order',
 
     ADMIN: 'material-in',
     INPUT: 'input',
-    ORDER: 'order',
+    ORDER: '',
     OUT_STOCK: 'out-stock',
     LAYOUT: 'warehouse-layout',
 
@@ -77,12 +77,12 @@ export const ROUTES = {
 };
 
 export const private_route = [
+
     {
-        Com: AllApp,
-        name: '물류 센터',
+        path: `/${ROUTES.ORDER}`,
+        Com: order,
         exact: true,
-        Icon: <HomeOutlined />,
-        path: `/${ROUTES.HOME}`,
+        name: '제품',
     },
     {
         Com: MaterialList,
@@ -91,18 +91,19 @@ export const private_route = [
         Icon: <HomeOutlined />,
         path: `/${ROUTES.INPUT}`,
     },
+    {
+        Com: AllApp,
+        name: '물류 센터',
+        exact: true,
+        Icon: <HomeOutlined />,
+        path: `/${ROUTES.HOME}`,
+    },
     // {
     //     path: `/${ROUTES.ADMIN}`,
     //     Com: MaterialIn,
     //     exact: true,
     //     name: 'Material Input',
     // },
-    {
-        path: `/${ROUTES.ORDER}`,
-        Com: order,
-        exact: true,
-        name: '제품',
-    },
     {
         path: `/${ROUTES.LAYOUT}`,
         Com: WarehouseLayout,

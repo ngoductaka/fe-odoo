@@ -1,10 +1,14 @@
 import React, { useMemo, useState } from 'react';
 import { Button, Input, Table, Tag } from 'antd';
+import _ from 'lodash';
 import { ArrowDownOutlined, PrinterOutlined } from '@ant-design/icons';
 import { GeneralHeader } from 'com/app_layout/general_header';
 import { TableCustom } from 'com/table_temp/helper/styled_component';
 import { images } from 'helper/static/images';
 import { LOCAL } from '_config/constant';
+
+import { dataMaterial } from 'assets/data/material';
+import BtnUpload from 'com/BtnUpload';
 const App = () => {
     const [val, setVal] = useState(0);
     return (
@@ -40,6 +44,7 @@ const App = () => {
                             <Button style={{ background: '#3A5BB8', color: '#fff' }}> 데이터를 얻다</Button>
                             <a href={`${LOCAL}/download/report4.xlsx`} download><Button className='mr-2 ml-2'> <ArrowDownOutlined /> 다운로드</Button></a>
                             <a href={`${LOCAL}/download/report4.xlsx`} download><Button icon={<PrinterOutlined />}>인쇄기</Button></a>
+                            <BtnUpload/>
                         </div>
                     </div>
                     <TableCustom dataSource={dataSource[val]} columns={columns} />;
@@ -51,13 +56,13 @@ const App = () => {
 
 export default App;
 
-const dataS1 = (count) => new Array(30).fill(0).map((i, index) => {
+const dataS1 = (count) => _.shuffle(dataMaterial).map((i, index) => {
     return {
         key: index + 1,
         stt: index + 1,
-        Name_of_NVL: makeid(3),
-        ERP: 'D104000' + makeid(3),
-        barcode: makeid(7),
+        Name_of_NVL: i.name,
+        ERP: 'D104000' + i.material,
+        barcode: i.id,
         TK: 'WH/IN/0' + count,
         divide: '재료',
         situation: '준비가 된',

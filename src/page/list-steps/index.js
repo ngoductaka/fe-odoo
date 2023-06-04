@@ -5,6 +5,7 @@ import { ArrowRightOutlined, ArrowLeftOutlined, ArrowDownOutlined, PrinterOutlin
 import { GeneralHeader } from 'com/app_layout/general_header';
 import { TableCustom } from 'com/table_temp/helper/styled_component';
 import { LOCAL } from '_config/constant';
+import BtnUpload from 'com/BtnUpload';
 
 const App = () => {
     return (
@@ -21,6 +22,7 @@ const App = () => {
                         <div>
                         <a href={`${LOCAL}/download/report3.xlsx`} download><Button className='flex items-center justify-center'> <ArrowDownOutlined /> 다운로드</Button></a>
                         <a href={`${LOCAL}/download/report3.xlsx`} download><Button icon={<PrinterOutlined />}>인쇄기</Button></a>
+                        <BtnUpload />
                         </div>
                     </div>
                     <TableCustom dataSource={dataSource} columns={columns} />;

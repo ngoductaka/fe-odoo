@@ -1,4 +1,7 @@
 import React, { useMemo } from 'react';
+import { dataMaterial } from 'assets/data/material';
+import _, { shuffle } from 'lodash';
+
 import { Button, DatePicker, Input, Table, Tabs } from 'antd';
 import { ArrowRightOutlined, ArrowLeftOutlined, ArrowDownOutlined, PrinterOutlined } from '@ant-design/icons';
 import { GeneralHeader } from 'com/app_layout/general_header';
@@ -11,6 +14,7 @@ import PerChart from './chart/per';
 import ColChart from './chart/col';
 import ChartDonut from './chart/donut';
 import ChartDonut2 from './chart/donut2';
+import BtnUpload from 'com/BtnUpload';
 
 const Setting = () => {
     return (
@@ -44,30 +48,30 @@ export default Setting;
 const Report3 = () => {
     return (
         <div>
-        <div className='flex'>
-            <div className='flex-1'>
-                <ChartDonut />
+            <div className='flex'>
+                <div className='flex-1'>
+                    <ChartDonut />
+                </div>
+                <div className='flex-1'>
+                    <ColChart />
+                </div>
             </div>
-            <div className='flex-1'>
-                <ChartDonut2 />
+            {/* <div className='flex'>
+                <div className='flex-1'>
+                    <PerChart />
+                </div>
+                <div className='flex-1'>
+                    <ChartDonut2 />
+                </div>
             </div>
-        </div>
-        <div className='flex'>
-            <div className='flex-1'>
-                <PerChart />
-            </div>
-            <div className='flex-1'>
-                <ColChart />
-            </div>
-        </div>
-        <div className='flex'>
-            <div className='flex-1'>
-                <PieChart />
-            </div>
-            <div className='flex-1'>
-                <LineChart />
-            </div>
-        </div>
+            <div className='flex'>
+                <div className='flex-1'>
+                    <PieChart />
+                </div>
+                <div className='flex-1'>
+                    <LineChart />
+                </div>
+            </div> */}
         </div>
     )
 }
@@ -86,6 +90,7 @@ const Report1 = () => {
                         <Button style={{ background: '#3A5BB8', color: '#fff' }}> 데이터를 얻다</Button>
                         <a href={`${LOCAL}/download/report1.xlsx`} download><Button className='mr-2 ml-2'> <ArrowDownOutlined /> 다운로드</Button></a>
                         <a href={`${LOCAL}/download/report1.xlsx`} download><Button icon={<PrinterOutlined />}>인쇄기</Button></a>
+                        <BtnUpload />
                     </div>
                 </div>
                 <h5>㈜누구나비나</h5>
@@ -119,18 +124,18 @@ const columns = [
         children: [
             {
                 title: '유형',
-                dataIndex: 'age',
-                key: 'age',
+                dataIndex: 'type1',
+                key: 'type1',
             },
             {
                 title: '숫자',
-                dataIndex: 'age',
-                key: 'age',
+                dataIndex: 'num1',
+                key: 'num1',
             },
             {
                 title: '낮',
-                dataIndex: 'age',
-                key: 'age',
+                dataIndex: 'afternoon1',
+                key: 'afternoon1',
             },
         ]
     },
@@ -139,53 +144,53 @@ const columns = [
         children: [
             {
                 title: '시리즈',
-                dataIndex: 'age',
-                key: 'age',
+                dataIndex: 'type2',
+                key: 'type2',
             },
             {
                 title: '숫자',
-                dataIndex: 'age',
-                key: 'age',
+                dataIndex: 'num2',
+                key: 'num2',
             },
             {
                 title: '낮',
-                dataIndex: 'age',
-                key: 'age',
+                dataIndex: 'afternoon2',
+                key: 'afternoon2',
             },
         ]
     },
     {
         title: '설명하다',
-        dataIndex: 'age',
-        key: 'age',
+        dataIndex: 'note',
+        key: 'note',
     },
     {
         title: 'ERP코드',
-        dataIndex: 'age',
-        key: 'age',
+        dataIndex: 'ERP',
+        key: 'ERP',
     },
     {
         title: '산업화, 재료',
-        dataIndex: 'age',
-        key: 'age',
+        dataIndex: 'name',
+        key: 'name',
     },
     {
         title: '기간 초 재고',
-        dataIndex: 'age',
-        key: 'age',
+        dataIndex: 'inventory',
+        key: 'inventory',
     },
     {
         title: '기간 동안',
         children: [
             {
                 title: '프로덕션에서 가져오기',
-                dataIndex: 'age',
-                key: 'age',
+                dataIndex: 'num3',
+                key: 'num3',
             },
             {
                 title: '다른 항목 입력',
-                dataIndex: 'age',
-                key: 'age',
+                dataIndex: 'num4',
+                key: 'num4',
             },
         ]
     },
@@ -194,42 +199,53 @@ const columns = [
         children: [
             {
                 title: '프로덕션용으로 내보내기',
-                dataIndex: 'age',
-                key: 'age',
+                dataIndex: 'num5',
+                key: 'num5',
             },
             {
                 title: '수출 파괴',
-                dataIndex: 'age',
-                key: 'age',
+                dataIndex: 'num6',
+                key: 'num6',
             },
             {
                 title: '수출 클레임',
-                dataIndex: 'age',
-                key: 'age',
+                dataIndex: 'num7',
+                key: 'num7',
             },
         ]
     },
 
     {
         title: '기타 수출',
-        dataIndex: 'age',
-        key: 'age',
+        dataIndex: 'note2',
+        key: 'note2',
     },
 ];
-const data = [];
-for (let i = 0; i < 100; i++) {
-    data.push({
-        key: i,
-        name: 'John Brown',
-        age: i + 1,
-        street: 'Lake Park',
-        building: 'C',
-        number: 2035,
-        companyAddress: 'Lake Street 42',
-        companyName: 'SoftLake Co',
-        gender: 'M',
-    });
-}
+const data = shuffle(dataMaterial).map((i, index) => {
+    const rand = (Math.random() * 100).toFixed(0)
+    const rand1 = (Math.random() * 100).toFixed(0)
+    const rand2 = (Math.random() * 100).toFixed(0)
+    return ({
+        'type1': 'SAA-120B-D-' + rand,
+        'num1': index + rand1,
+        'afternoon1': rand,
+        'type2': 'FDA-150G-' + rand1,
+        'num2': rand2,
+        'afternoon2': rand1,
+        'note': '',
+        'ERP': i.material,
+        'name': i.name,
+        'inventory': rand + rand1 + rand2,
+        'num3': rand,
+        'num4': rand2,
+        'num5': rand1,
+        'num6': rand + rand1,
+        'num7': rand + rand2,
+        'note2': '',
+    })
+})
+
+
 
 
 
@@ -248,6 +264,7 @@ const Report2 = () => {
                         <Button style={{ background: '#3A5BB8', color: '#fff' }}> 데이터를 얻다</Button>
                         <a href={`${LOCAL}/download/report2.xlsx`} download><Button className='mr-2 ml-2'> <ArrowDownOutlined /> 다운로드</Button> </a>
                         <a href={`${LOCAL}/download/report2.xlsx`} download><Button icon={<PrinterOutlined />}>인쇄기</Button> </a>
+                        <BtnUpload />
                     </div>
                 </div>
                 <h5>㈜누구나비나</h5>
@@ -279,71 +296,74 @@ const columns2 = [
     {
         title: '제조일자',
 
-        dataIndex: 'age',
-        key: 'age',
+        dataIndex: 'date',
+        key: 'date',
 
     },
     {
         title: '위치',
 
-        dataIndex: 'age',
-        key: 'age',
+        dataIndex: 'location',
+        key: 'location',
 
     },
     {
         title: '구분',
-        dataIndex: 'age',
-        key: 'age',
+        dataIndex: 'phancong',
+        key: 'phancong',
     },
     {
         title: 'ERP code',
-        dataIndex: 'age',
-        key: 'age',
+        dataIndex: 'ERP',
+        key: 'ERP',
     },
     {
         title: '품명',
-        dataIndex: 'age',
-        key: 'age',
+        dataIndex: 'name',
+        key: 'name',
     },
     {
         title: 'RD code',
-        dataIndex: 'age',
-        key: 'age',
+        dataIndex: 'bar',
+        key: 'bar',
     },
     {
         title: '특이사항',
-        dataIndex: 'age',
-        key: 'age',
+        dataIndex: 'num1',
+        key: 'num1',
     },
     {
         title: 'lot no.',
-        dataIndex: 'age',
-        key: 'age',
+        dataIndex: 'num2',
+        key: 'num2',
     },
     {
         title: '출고',
-        dataIndex: 'age',
-        key: 'age',
+        dataIndex: 'num3',
+        key: 'num3',
     },
     {
         title: 'Note',
-        dataIndex: 'age',
-        key: 'age',
+        dataIndex: 'note',
+        key: 'note',
     },
 
 ];
-const data2 = [];
-for (let i = 0; i < 100; i++) {
-    data2.push({
-        key: i,
-        name: 'John Brown',
-        age: i + 1,
-        street: 'Lake Park',
-        building: 'C',
-        number: 2035,
-        companyAddress: 'Lake Street 42',
-        companyName: 'SoftLake Co',
-        gender: 'M',
-    });
-}
+const data2 = shuffle(dataMaterial).map((i, index) => {
+    const rand = (Math.random() * 100).toFixed(0)
+    const rand1 = (Math.random() * 100).toFixed(0)
+    const rand2 = (Math.random() * 100).toFixed(0)
+    return ({
+        date: '2002년 6월 5일',
+        'location': '지역 A-0' + rand,
+        'phancong': 'TBA045957' + rand2,
+        'ERP': i.material,
+        'name': i.name,
+        'bar': i.id,
+        'num1': rand,
+        'num2': 'lot-RD07-D-0'+rand1,
+        'num3': rand2,
+        'note': '',
+    })
+})
 

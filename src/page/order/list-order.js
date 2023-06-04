@@ -6,12 +6,13 @@ import { TableCustom } from 'com/table_temp/helper/styled_component';
 import axios from 'axios';
 import { dataMaterial } from 'assets/data/material';
 import { LOCAL } from '_config/constant';
+import BtnUpload from 'com/BtnUpload';
 
 
 const App = () => {
     const [data, setData] = useState([]);
     const getData = async () => {
-        const { data } = await axios.get('http://172.174.226.12:3909/map');
+        const { data } = await axios.get(LOCAL+'/map');
         const mapObj = {};
         Object.keys(data).map(lo => {
             Object.keys(data[lo]).map(ma => {
@@ -33,7 +34,7 @@ const App = () => {
             return {
                 key: index + 1,
                 stt: index + 1,
-                Name_of_NVL: 'ASF1' + index,
+                Name_of_NVL: i.name,
                 ERP: i.material,
                 barcode: i.id,
                 TK: 'WH/IN/01' + index,
@@ -71,6 +72,7 @@ const App = () => {
                             <Button style={{ background: '#3A5BB8', color: '#fff' }}> 데이터를 얻다</Button>
                             <a href={`${LOCAL}/download/report3.xlsx`} download><Button className='mr-2 ml-2'> <ArrowDownOutlined /> 다운로드</Button></a>
                             <a href={`${LOCAL}/download/report3.xlsx`} download><Button icon={<PrinterOutlined />}>인쇄기</Button></a>
+                            <BtnUpload />
                         </div>
                     </div>
                     <TableCustom dataSource={data} columns={columns} />;
