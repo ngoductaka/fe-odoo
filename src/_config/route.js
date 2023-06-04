@@ -187,6 +187,13 @@ export const MAP_ROLE = {
             name: 'material-rfid',
             // hidden: true,
         },
+        {
+            path: `/${ROUTES.BoxInfor}`,
+            Com: BoxInfor,
+            exact: true,
+            name: 'Scan',
+            // hidden: true,
+        },
     ],
 };
 
