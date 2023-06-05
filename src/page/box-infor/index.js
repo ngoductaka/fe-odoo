@@ -38,12 +38,12 @@ const App = () => {
       const rfidList = removeDuplicates(stringRfid.cordwood(12)).filter(i => i.length === 12)
 
       const { data } = await axios.post('http://172.174.226.12:3909/map', {
-        "location": id,
+        "location": id.trim(),
         "barCode": rfidList
       });
 
-      openNotificationWithIcon('success', "show rfid success")
-      setDataBox(data.data)
+      openNotificationWithIcon('success', "upload success");
+      form.resetFields();
     } catch (err) {
       handleErr(err);
     }
@@ -69,7 +69,7 @@ const App = () => {
             _handleUpload()
           }
         }} type='primary'
-          style={{ position: 'fixed', bottom: 40, right: 20, zIndex: 100 }}>Search</Button>
+          style={{ position: 'fixed', bottom: 40, right: 20, zIndex: 100 }}>Submit</Button>
         <Button onClick={() => {
           setDataBox([]);
 
