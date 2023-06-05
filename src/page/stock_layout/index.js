@@ -15,6 +15,7 @@ import { get as getArea } from 'page/material-in/area_table/services'
 import * as services from "./services";
 import { apiClientMongo } from 'helper/request/api_client_v1';
 import axios from 'axios';
+import { LOCAL } from '_config/constant';
 
 const dataMap = [
     {
@@ -102,7 +103,7 @@ const RenderMap = React.memo(({ data: areaData, onOkModal }) => {
             //         'D10400030': 10,
             //     },
             // }
-            const { data } = await axios.get('http://172.174.226.12:3909/map')
+            const { data } = await axios.get(`${LOCAL}/map`)
 
 
             setLocation(data || {});

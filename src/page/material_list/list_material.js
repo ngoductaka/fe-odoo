@@ -47,7 +47,7 @@ const App = () => {
                             <BtnUpload/>
                         </div>
                     </div>
-                    <TableCustom dataSource={dataSource[val]} columns={columns} />;
+                    <TableCustom pagination={{pageSize: 30}} dataSource={dataSource[val]} columns={columns} />;
                 </div>
             </div>
         </div>

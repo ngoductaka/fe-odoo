@@ -4,6 +4,7 @@ import { ArrowRightOutlined, ArrowLeftOutlined, ArrowDownOutlined, PrinterOutlin
 import { GeneralHeader } from 'com/app_layout/general_header';
 import { TableCustom } from 'com/table_temp/helper/styled_component';
 import axios from 'axios';
+import _ from 'lodash';
 import { dataMaterial } from 'assets/data/material';
 import { LOCAL } from '_config/constant';
 import BtnUpload from 'com/BtnUpload';
@@ -12,7 +13,7 @@ import BtnUpload from 'com/BtnUpload';
 const App = () => {
     const [data, setData] = useState([]);
     const getData = async () => {
-        const { data } = await axios.get(LOCAL+'/map');
+        const { data } = await axios.get(LOCAL + '/map');
         const mapObj = {};
         Object.keys(data).map(lo => {
             Object.keys(data[lo]).map(ma => {
@@ -40,7 +41,7 @@ const App = () => {
                 TK: 'WH/IN/01' + index,
                 divide: '재료',
                 situation: '준비가 된',
-                dry: i.count,
+                dry: (1 + (i.count + 1) % 3) * 26,
                 location: lo
             }
         }))
@@ -75,7 +76,19 @@ const App = () => {
                             <BtnUpload />
                         </div>
                     </div>
-                    <TableCustom dataSource={data} columns={columns} />;
+                    <TableCustom
+                        pagination={{ pageSize: 30 }} dataSource={data} columns={columns}
+                        expandable={{
+                            expandedRowRender: (record) => <div className='p-5 bg-gray-200'>
+                                <h4 className=''>List box of {record.Name_of_NVL} in warehouse:</h4>
+                                <TableCustom
+                                    pagination={{hideOnSinglePage: true}} dataSource={[record]} columns={columns2}
+                                />
+                            </div>,
+
+                        }}
+
+                    />;
                 </div>
             </div>
         </div>
@@ -138,16 +151,11 @@ const columns = [
         dataIndex: 'ERP',
         key: 'ERP',
     },
-    {
-        title: '바코드',
-        dataIndex: 'barcode',
-        key: 'barcode',
-    },
-    {
-        title: 'TK',
-        dataIndex: 'TK',
-        key: 'TK',
-    },
+    // {
+    //     title: 'TK',
+    //     dataIndex: 'TK',
+    //     key: 'TK',
+    // },
     {
         title: '나누다',
         dataIndex: 'divide',
@@ -162,10 +170,53 @@ const columns = [
         // }
     },
     {
-        title: '말랐다',
+        title: '재고량',
         dataIndex: 'dry',
         key: 'dry',
-        // render: () => <img src={images.barcode} />
+        // render: () => (Math.random() * 1000).toFixed(0)
+    },
+];
+
+
+const columns2 = [
+    {
+        title: 'NVL의 이름',
+        dataIndex: 'Name_of_NVL',
+        key: 'Name_of_NVL',
+    },
+    {
+        title: 'ERP',
+        dataIndex: 'ERP',
+        key: 'ERP',
+    },
+    {
+        title: '바코드',
+        dataIndex: 'barcode',
+        key: 'barcode',
+    },
+    // {
+    //     title: 'TK',
+    //     dataIndex: 'TK',
+    //     key: 'TK',
+    // },
+    {
+        title: '나누다',
+        dataIndex: 'divide',
+        key: 'divide',
+    },
+    {
+        title: '상태',
+        dataIndex: 'situation',
+        key: 'situation',
+        // render: (val) => {
+        //     return <Tag color="success">{val}</Tag>
+        // }
+    },
+    {
+        title: '재고량',
+        dataIndex: 'dry',
+        key: 'dry',
+        // render: () => (Math.random() * 1000).toFixed(0)
     },
     {
         title: '위치',

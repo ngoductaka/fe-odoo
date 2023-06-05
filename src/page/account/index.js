@@ -49,10 +49,10 @@ const Report3 = () => {
     return (
         <div>
             <div className='flex'>
-                <div className='flex-1'>
+                <div className='flex-1 p-20'>
                     <ChartDonut />
                 </div>
-                <div className='flex-1'>
+                <div className='flex-1 p-20'>
                     <ColChart />
                 </div>
             </div>
@@ -108,9 +108,10 @@ const Report1 = () => {
                     dataSource={data}
                     bordered
                     size="middle"
+                    pagination={{ pageSize: 30 }}
                     scroll={{
                         x: 'calc(700px + 50%)',
-                        y: 240,
+                        y: 'calc(100vh - 550px)',
                     }} />
             </div>
         </div>
@@ -281,10 +282,11 @@ const Report2 = () => {
                     columns={columns2}
                     dataSource={data2}
                     bordered
+                    pagination={{ pageSize: 30 }}
                     size="middle"
                     scroll={{
                         x: '100vw',
-                        y: 240,
+                        y: 'calc(100vh - 450px)',
                     }} />
             </div>
         </div>
@@ -361,7 +363,7 @@ const data2 = shuffle(dataMaterial).map((i, index) => {
         'name': i.name,
         'bar': i.id,
         'num1': rand,
-        'num2': 'lot-RD07-D-0'+rand1,
+        'num2': 'lot-RD07-D-0' + rand1,
         'num3': rand2,
         'note': '',
     })

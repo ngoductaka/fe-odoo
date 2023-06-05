@@ -5,7 +5,7 @@ import { get, isEmpty } from 'lodash';
 import { apiClient } from 'helper/request/api_client';
 import { openNotificationWithIcon } from 'helper/request/notification_antd';
 import axios from 'axios';
-import { REAL_SER } from '_config/constant';
+import { LOCAL, REAL_SER } from '_config/constant';
 import { apiClientMongo } from 'helper/request/api_client_v1';
 import { GeneralHeader } from 'com/app_layout/general_header';
 import { handleErr } from 'helper/request/handle_err_request';
@@ -37,7 +37,7 @@ const App = () => {
       const stringRfid = barcode.trim().split(/\W/).join('');
       const rfidList = removeDuplicates(stringRfid.cordwood(12)).filter(i => i.length === 12)
 
-      const { data } = await axios.post('http://172.174.226.12:3909/map', {
+      await axios.post(`${LOCAL}/map`, {
         "location": id.trim(),
         "barCode": rfidList
       });
