@@ -8,6 +8,7 @@ import _ from 'lodash';
 import { dataMaterial } from 'assets/data/material';
 import { LOCAL } from '_config/constant';
 import BtnUpload from 'com/BtnUpload';
+import { DownloadExcelBtn } from 'com/excel/gen_excel';
 
 
 const App = () => {
@@ -57,6 +58,27 @@ const App = () => {
             clearInterval(interval)
         }
     }, [])
+    const dnd = ['stt',
+        'Name_of_NVL',
+        'ERP',
+        'divide',
+        'situation',
+        'dry',]
+    // 숫자 순서	NVL의 이름	ERP	나누다	상태	재고량
+    const handleExcelUpload = (data) => {
+        const [_, ...dataExcel] = data;
+        console.log('dataExcel__', dataExcel);
+        const dataResult = dataExcel.map((item, index) => {
+            const dataReturn = {};
+            dnd.map((i, ind) => {
+                dataReturn[i] = item[ind]
+            })
+            return dataReturn;
+        });
+        console.log('dataResult', dataResult);
+        setData(dataResult);
+
+    }
 
     return (
         <div>
@@ -70,21 +92,66 @@ const App = () => {
                             <div />
                         </div>
                         <div>
-                            <Button style={{ background: '#3A5BB8', color: '#fff' }}> 데이터를 얻다</Button>
-                            <a href={`${LOCAL}/download/report3.xlsx`} download><Button className='mr-2 ml-2'> <ArrowDownOutlined /> 다운로드</Button></a>
-                            <a href={`${LOCAL}/download/report3.xlsx`} download><Button icon={<PrinterOutlined />}>인쇄기</Button></a>
-                            <BtnUpload />
+                            {/* <Button style={{ background: '#3A5BB8', color: '#fff' }}> 데이터를 얻다</Button> */}
+                            {/* <a href={`${LOCAL}/download/report3.xlsx`} download><Button className='mr-2 ml-2'> <ArrowDownOutlined /> 다운로드</Button></a> */}
+                            <DownloadExcelBtn
+                                element={<Button className='mr-2 ml-2'> <ArrowDownOutlined /> 다운로드.</Button>}
+                                data={data}
+                                format={[
+                                    {
+                                        label: '숫자 순서',
+                                        value: 'stt',
+                                    },
+                                    {
+                                        label: 'NVL의 이름',
+                                        value: 'Name_of_NVL',
+                                    },
+                                    {
+                                        label: 'ERP',
+                                        value: 'ERP',
+                                    },
+                                    {
+                                        label: '나누다',
+                                        value: 'divide',
+                                    },
+                                    {
+                                        label: '상태',
+                                        value: 'situation',
+                                    },
+                                    {
+                                        label: '재고량',
+                                        value: 'dry',
+                                    },
+                                ]}
+                            />
+                            <Button onClick={() => { window.print(); }} icon={<PrinterOutlined />}>인쇄기</Button>
+                            <BtnUpload handleFile={handleExcelUpload} />
                         </div>
                     </div>
                     <TableCustom
                         pagination={{ pageSize: 30 }} dataSource={data} columns={columns}
                         expandable={{
-                            expandedRowRender: (record) => <div className='p-5 bg-gray-200'>
-                                <h4 className=''>List box of {record.Name_of_NVL} in warehouse:</h4>
-                                <TableCustom
-                                    pagination={{hideOnSinglePage: true}} dataSource={[record]} columns={columns2}
-                                />
-                            </div>,
+                            expandedRowRender: (record) => {
+                                const dataFake = new Array(9).fill(record).map((i, index) => {
+                                    return {
+                                        ...record,
+                                        Name_of_NVL: i.Name_of_NVL,
+                                        ERP: i.ERP,
+                                        barcode: i.barcode + index,
+                                        TK: 'WH/IN/01' + index,
+                                        divide: '재료',
+                                        situation: '준비가 된',
+                                        dry: (index + 1) * (i.dry % 6),
+                                        location: ''
+                                    }
+                                })
+                                return <div className='p-5 bg-gray-200'>
+                                    <h4 className=''>List box of {record.Name_of_NVL} in warehouse:</h4>
+                                    <TableCustom
+                                        pagination={{ hideOnSinglePage: true }} dataSource={[record, ...dataFake]} columns={columns2}
+                                    />
+                                </div>
+                            },
 
                         }}
 
@@ -151,11 +218,6 @@ const columns = [
         dataIndex: 'ERP',
         key: 'ERP',
     },
-    // {
-    //     title: 'TK',
-    //     dataIndex: 'TK',
-    //     key: 'TK',
-    // },
     {
         title: '나누다',
         dataIndex: 'divide',

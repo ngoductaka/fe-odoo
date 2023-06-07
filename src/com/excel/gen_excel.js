@@ -11,7 +11,7 @@ const Download = ({ data, element }) => {
     const dataExcel = React.useMemo(() => {
         console.log('data', data)
         if (!_.isEmpty(data) && data[0])
-            return data.sort((a, b) => a?.rfid_code-b?.rfid_code).map(item => ({
+            return data.sort((a, b) => a?.rfid_code - b?.rfid_code).map(item => ({
                 code: String(item.rfid_code),
                 itemcode: String(item.itemcode),
                 material_name: String(item.material_name),
@@ -23,7 +23,7 @@ const Download = ({ data, element }) => {
                 receivied_qty: String(item.receivied_qty),
                 supplier_name: String(item.supplier_name),
             }))
-            return []
+        return []
     }, [data]);
     return (
         <ExcelFile element={element} name={`${_.get(data, [0, 'itemcode', ''])}-${moment().format("DD-MMM-YYYY")}`}>
@@ -38,6 +38,20 @@ const Download = ({ data, element }) => {
                 <ExcelColumn label="Carton Size" value={'carton_size'} />
                 <ExcelColumn label="Receivied qty" value={'receivied_qty'} />
                 <ExcelColumn label="Supplier Name" value={'supplier_name'} />
+            </ExcelSheet>
+        </ExcelFile>
+    );
+
+}
+
+
+export const DownloadExcelBtn = ({ data, element, format }) => {
+    return (
+        <ExcelFile element={element} name={`report-${moment().format("DD-MMM-YYYY")}`}>
+            <ExcelSheet data={data} name="제품">
+                {format.map(i => {
+                    return <ExcelColumn label={i.label} value={i.value} />
+                })}
             </ExcelSheet>
         </ExcelFile>
     );
