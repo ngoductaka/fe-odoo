@@ -98,12 +98,6 @@ export const private_route = [
         Icon: <HomeOutlined />,
         path: `/${ROUTES.HOME}`,
     },
-    // {
-    //     path: `/${ROUTES.ADMIN}`,
-    //     Com: MaterialIn,
-    //     exact: true,
-    //     name: 'Material Input',
-    // },
     {
         path: `/${ROUTES.LAYOUT}`,
         Com: WarehouseLayout,

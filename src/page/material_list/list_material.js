@@ -5,12 +5,43 @@ import { ArrowDownOutlined, PrinterOutlined } from '@ant-design/icons';
 import { GeneralHeader } from 'com/app_layout/general_header';
 import { TableCustom } from 'com/table_temp/helper/styled_component';
 import { images } from 'helper/static/images';
+import { DownloadExcelBtn } from 'com/excel/gen_excel';
 import { LOCAL } from '_config/constant';
 
 import { dataMaterial } from 'assets/data/material';
 import BtnUpload from 'com/BtnUpload';
+const dnd = [
+    'stt',
+    'Name_of_NVL',
+    'ERP',
+    'barcode',
+    'TK',
+    'divide',
+]
 const App = () => {
     const [val, setVal] = useState(0);
+
+    const [dataSource, setState] = useState([
+        dataS1(1),
+        dataS1(2),
+        dataS1(3),
+        dataS1(4),
+    ]);
+    const handleExcelUpload = (data) => {
+
+        const [_, ...dataExcel] = data;
+        console.log('dataExcel__', dataExcel);
+        const dataResult = dataExcel.map((item, index) => {
+            const dataReturn = {};
+            dnd.map((i, ind) => {
+                dataReturn[i] = item[ind]
+            })
+            return dataReturn;
+        });
+        console.log('dataResult', dataResult);
+        dataSource[val] = dataResult;
+        setState([...dataSource]);
+    }
     return (
         <div>
             <GeneralHeader title='Process flow​' />
@@ -41,13 +72,42 @@ const App = () => {
                             <div />
                         </div>
                         <div>
-                            <Button style={{ background: '#3A5BB8', color: '#fff' }}> 데이터를 얻다</Button>
-                            <a href={`${LOCAL}/download/report4.xlsx`} download><Button className='mr-2 ml-2'> <ArrowDownOutlined /> 다운로드</Button></a>
-                            <a href={`${LOCAL}/download/report4.xlsx`} download><Button icon={<PrinterOutlined />}>인쇄기</Button></a>
-                            <BtnUpload/>
+                            {/* <Button style={{ background: '#3A5BB8', color: '#fff' }}> 데이터를 얻다</Button> */}
+                            <DownloadExcelBtn
+                                element={<Button className='mr-2 ml-2'> <ArrowDownOutlined /> 다운로드.</Button>}
+                                data={dataSource[val]}
+                                format={[
+                                    {
+                                        label: '숫자 순서',
+                                        value: 'stt',
+                                    },
+                                    {
+                                        label: 'NVL의 이름',
+                                        value: 'Name_of_NVL',
+                                    },
+                                    {
+                                        label: 'ERP',
+                                        value: 'ERP',
+                                    },
+                                    {
+                                        label: '바코드',
+                                        value: 'barcode',
+                                    },
+                                    {
+                                        label: 'TK',
+                                        value: 'TK',
+                                    },
+                                    {
+                                        label: '나누다',
+                                        value: 'divide',
+                                    },
+                                ]}
+                            />
+                            <Button onClick={() => { window.print(); }} icon={<PrinterOutlined />}>인쇄기</Button>
+                            <BtnUpload handleFile={handleExcelUpload} />
                         </div>
                     </div>
-                    <TableCustom pagination={{pageSize: 30}} dataSource={dataSource[val]} columns={columns} />;
+                    <TableCustom pagination={{ pageSize: 30 }} dataSource={dataSource[val]} columns={columns} />;
                 </div>
             </div>
         </div>
@@ -69,12 +129,6 @@ const dataS1 = (count) => _.shuffle(dataMaterial).map((i, index) => {
         injection: '',
     }
 })
-const dataSource = [
-    dataS1(1),
-    dataS1(2),
-    dataS1(3),
-    dataS1(4),
-];
 
 const columns = [
     {
@@ -112,7 +166,7 @@ const columns = [
         dataIndex: 'situation',
         key: 'situation',
         render: (val) => {
-            return Math.random() > 0.5 ?<Tag color="success">준비가 된</Tag> : <Tag  color="error">준비되지 않았다</Tag>
+            return Math.random() > 0.5 ? <Tag color="success">준비가 된</Tag> : <Tag color="error">준비되지 않았다</Tag>
         }
     },
     {

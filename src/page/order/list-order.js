@@ -92,8 +92,6 @@ const App = () => {
                             <div />
                         </div>
                         <div>
-                            {/* <Button style={{ background: '#3A5BB8', color: '#fff' }}> 데이터를 얻다</Button> */}
-                            {/* <a href={`${LOCAL}/download/report3.xlsx`} download><Button className='mr-2 ml-2'> <ArrowDownOutlined /> 다운로드</Button></a> */}
                             <DownloadExcelBtn
                                 element={<Button className='mr-2 ml-2'> <ArrowDownOutlined /> 다운로드.</Button>}
                                 data={data}

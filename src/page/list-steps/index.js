@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Button, Input, Table } from 'antd';
 import './styles.css';
 import { ArrowRightOutlined, ArrowLeftOutlined, ArrowDownOutlined, PrinterOutlined } from '@ant-design/icons';
@@ -6,8 +6,31 @@ import { GeneralHeader } from 'com/app_layout/general_header';
 import { TableCustom } from 'com/table_temp/helper/styled_component';
 import { LOCAL } from '_config/constant';
 import BtnUpload from 'com/BtnUpload';
+import { DownloadExcelBtn } from 'com/excel/gen_excel';
 
+import { dataMaterial } from 'assets/data/material';
 const App = () => {
+    const [dataSource, setData] = useState(dataSourceD);
+    
+    const dnd = ['name',
+        'ERP',
+        ...dateCol1.map(i => i.value)
+]
+    // 숫자 순서	NVL의 이름	ERP	나누다	상태	재고량
+    const handleExcelUpload = (data) => {
+        const [_, ...dataExcel] = data;
+        console.log('dataExcel__', dataExcel);
+        const dataResult = dataExcel.map((item, index) => {
+            const dataReturn = {};
+            dnd.map((i, ind) => {
+                dataReturn[i] = item[ind]
+            })
+            return dataReturn;
+        });
+        console.log('dataResult', dataResult);
+        setData(dataResult);
+
+    }
     return (
         <div>
             <GeneralHeader title='Process flow​' />
@@ -20,12 +43,34 @@ const App = () => {
                             <div />
                         </div>
                         <div>
-                        <a href={`${LOCAL}/download/report3.xlsx`} download><Button className='flex items-center justify-center'> <ArrowDownOutlined /> 다운로드</Button></a>
-                        <a href={`${LOCAL}/download/report3.xlsx`} download><Button icon={<PrinterOutlined />}>인쇄기</Button></a>
-                        <BtnUpload />
+
+                            <DownloadExcelBtn
+                                element={<Button className='mr-2 ml-2'> <ArrowDownOutlined /> 다운로드.</Button>}
+                                data={dataSource}
+                                format={[
+                                    {
+                                        label: 'NVL의 이름',
+                                        value: 'name',
+                                    },
+                                    {
+                                        label: 'ERP',
+                                        value: 'ERP',
+                                    },
+                                    ...dateCol1,
+                                ]}
+                            />
+                            <Button onClick={() => { window.print(); }} icon={<PrinterOutlined />}>인쇄기</Button>
+                            <BtnUpload handleFile={handleExcelUpload} />
                         </div>
                     </div>
-                    <TableCustom pagination={{pageSize: 30}} dataSource={dataSource} columns={columns} />;
+                    <TableCustom
+                        pagination={{ pageSize: 30 }}
+                        dataSource={dataSource}
+                        columns={columns}
+                        scroll={{
+                            x: '90vw'
+                        }}
+                    />;
                 </div>
             </div>
         </div>
@@ -33,63 +78,47 @@ const App = () => {
 };
 
 export default App;
+const D = 15;
+const dataSourceD = dataMaterial.map((i, index) => {
+    const rand = (Math.random() * 30).toFixed(0);
+    const dateNum = {};
+    new Array(D).fill(0).map((i, index) => {
 
-const dataSource = new Array(20).fill(0).map((i, index) => {
-    const rand = (Math.random() * 30).toFixed(0)
+        dateNum['num' + index] = rand * (10 - index)
+    });
     return {
-
         key: index + 1,
-        lading_code: `TBA04595780${rand}`,
-        lading_date: `2002년 5월 ${rand}일`,
-        shipping_unit: 'GHN',
-        received_date: `2002년 5월 ${rand}일`,
-
+        name: i.name,
+        ERP: i.material,
+        ...dateNum,
+    }
+})
+const dateCol = new Array(D).fill(0).map((i, index) => {
+    return {
+        title: `2023년 6월 ${index + 3}일`,
+        dataIndex: 'num' + index,
+        key: 'num' + index,
+        width: 100
+    }
+})
+const dateCol1 = new Array(D).fill(0).map((i, index) => {
+    return {
+        label: `2023년 6월 ${index + 3}일`,
+        value: 'num' + index,
     }
 })
 
-// const dataSource = [
-//     {
-//         key: '1',
-//         lading_code: 'TBA064595780100',
-//         lading_date: '2002년 5월 24일',
-//         shipping_unit: 'GHN',
-//         received_date: '2002년 5월 24일',
-//     },
-//     {
-//         key: '2',
-//         lading_code: 'TBA064595780101',
-//         lading_date: '2002년 5월 24일',
-//         shipping_unit: 'GHN',
-//         received_date: '2002년 5월 24일',
-//     },
-//     {
-//         key: '3',
-//         lading_code: 'TBA064595780102',
-//         lading_date: '2002년 5월 24일',
-//         shipping_unit: 'GHN',
-//         received_date: '2002년 5월 24일',
-//     },
-// ];
 
 const columns = [
     {
-        title: '선하 증권 코드',
-        dataIndex: 'lading_code',
-        key: 'lading_code',
+        title: 'NVL의 이름',
+        dataIndex: 'name',
+        key: 'name',
     },
     {
-        title: '선하 증권 일자',
-        dataIndex: 'lading_date',
-        key: 'lading_date',
+        title: 'ERP',
+        dataIndex: 'ERP',
+        key: 'ERP',
     },
-    {
-        title: '배송 단위',
-        dataIndex: 'shipping_unit',
-        key: 'shipping_unit',
-    },
-    {
-        title: '받은 날짜',
-        dataIndex: 'received_date',
-        key: 'received_date',
-    },
+    ...dateCol
 ];
