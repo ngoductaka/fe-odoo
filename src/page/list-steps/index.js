@@ -1,5 +1,7 @@
 import React, { useMemo, useState } from 'react';
-import { Button, Input, Table } from 'antd';
+import { Button, Input, DatePicker } from 'antd';
+
+
 import './styles.css';
 import { ArrowRightOutlined, ArrowLeftOutlined, ArrowDownOutlined, PrinterOutlined } from '@ant-design/icons';
 import { GeneralHeader } from 'com/app_layout/general_header';
@@ -10,6 +12,10 @@ import { DownloadExcelBtn } from 'com/excel/gen_excel';
 
 import { dataMaterial } from 'assets/data/material';
 import moment from 'moment';
+
+
+const { RangePicker } = DatePicker;
+
 const App = () => {
     const [dataSource, setData] = useState(dataSourceD);
 
@@ -44,7 +50,7 @@ const App = () => {
                             <div />
                         </div>
                         <div>
-
+                            <RangePicker />
                             <DownloadExcelBtn
                                 element={<Button className='mr-2 ml-2'> <ArrowDownOutlined /> 다운로드.</Button>}
                                 data={dataSource}
