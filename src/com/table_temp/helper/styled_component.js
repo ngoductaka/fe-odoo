@@ -4,7 +4,31 @@ import styled from "styled-components";
 export const CardCustom = styled(Card)`
     box-shadow: 0px 6px 14px 2px #ccc;
     margin: 10px 10px;
+
 `;
+
+export const TableNoPadding = styled(Table)`
+    td.ant-table-cell {
+    text-align: center;
+    padding: 0px;
+    }
+    td.ant-table-cell:first-child {
+    padding: 0px;
+    text-align: left;
+    }
+
+    table th {
+    background: #eee;
+    padding: 0px;
+    text-align: center;
+    }
+
+    table th:first-child {
+    background: #eee;
+    padding: 0px;
+    text-align: left;
+    }
+`
 
 export const TableCustom = styled(Table)`
     td.ant-table-cell {
