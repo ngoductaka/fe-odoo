@@ -19,7 +19,6 @@ import BtnUpload from 'com/BtnUpload';
 const Setting = () => {
     return (
         <div>
-            <GeneralHeader title='User list​' />
             <Tabs
                 tabBarStyle={{
                     background: '#fafafa'

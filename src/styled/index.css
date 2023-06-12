@@ -1,16 +1,10 @@
 body {
   margin: 0;
   background: #fff;
-  font-family: 'Roboto', 'Segoe UI', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-size: 15px;
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
 }
 
 .fixed-btn {
@@ -25,4 +19,20 @@ code {
   justify-content: center;
   align-items: center;
   z-index: 100;
+}
+
+.ro-custom.ant-btn-text:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+.ant-tabs-small > .ant-tabs-nav .ant-tabs-tab {
+  padding: 0px;
+}
+.ant-card-head {
+  /* border: none; */
+}
+:where(.css-dev-only-do-not-override-12jzuas)[class^='ant-layout'],
+:where(.css-dev-only-do-not-override-12jzuas)[class*=' ant-layout'] {
+  font-family: Roboto !important;
+  font-size: 15px;
+  color: #1b1d29;
 }

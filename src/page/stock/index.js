@@ -118,7 +118,6 @@ const App = ({ handleClickCell = null, show }) => {
                     )}
                 </Form>
             </Modal>
-            {show ? null: <GeneralHeader title='Layout stock' />}
             <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <div style={{ position: 'relative', border: '2px solid', margin: 6 }}>
                     {/* backgrounds */}

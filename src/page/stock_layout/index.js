@@ -48,7 +48,6 @@ const App = ({ handleClickCell, show }) => {
     const [area, setArea] = useState(dataMap);
     return (
         <div>
-            {handleClickCell ? null : <GeneralHeader title='Warehouse Layout' />}
             <div style={{ padding: '0px 15px' }}>
                 <Tabs size="small" type="card" destroyInactiveTabPane>
                     {area.map(item => {

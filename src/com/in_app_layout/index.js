@@ -1,10 +1,10 @@
-import { LogoutOutlined, DoubleRightOutlined, DoubleLeftOutlined } from '@ant-design/icons';
+import { LogoutOutlined, DoubleRightOutlined, AppstoreOutlined } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 import { requestLogout } from 'app_state/login';
 // component
 import { images } from 'helper/static/images';
 import { get } from 'lodash';
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useRouteMatch } from 'react-router-dom';
@@ -13,6 +13,7 @@ import { Items } from './right_item_bar';
 import { Wrapper } from './styled';
 import styled from 'styled-components';
 import { UseRouter } from 'rootRouter';
+import { LeftMenu } from './left_menu';
 
 
 
@@ -20,10 +21,8 @@ const App = ({ children, title = '' }) => {
     const [collapsed, onCollapse] = React.useState(true);
     const [showAllApp, setShowAllApp] = React.useState(false);
     const User = useSelector(state => get(state, 'app.user', {}));
-    // const [width, setWidth] = React.useState(window.innerWidth);
-
     const [showSider, setShowSider] = React.useState(true)
-    const [marginContent, setMaginContent] = React.useState(40)
+    const [marginContent, setMaginContent] = React.useState(55)
     const dispatch = useDispatch();
 
     const history = useHistory();
@@ -50,10 +49,10 @@ const App = ({ children, title = '' }) => {
                             onClick={() => history.push('/')}
                             style={{
                                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                width: 40,
+                                // width: 40,
                                 height: 35,
                             }}>
-                            <img src={User.logo || 'https://rostek.com.vn/wp-content/uploads/2021/07/cropped-512-32x32.png'} alt="logo" style={{ height: 25, marginLeft: 1, borderRadius: '50%' }} />
+                            <img src={images.anyone_logo} alt="logo" style={{ height: 25, marginLeft: 1}} />
                         </div>
 
                         <div style={{ margin: '1px 10px' }}>
@@ -64,9 +63,11 @@ const App = ({ children, title = '' }) => {
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                         <Items />
                     </div>
-                    {/* <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']} items={items1} /> */}
                 </Layout.Header>
-                <Layout style={{ minHeight: '95vh' }}>
+                <Layout style={{
+                    minHeight: '95vh',
+                    background: '#F8F8FC'
+                }}>
                     {showSider &&
                         <Layout.Sider
                             collapsedWidth={42}
@@ -76,30 +77,38 @@ const App = ({ children, title = '' }) => {
                             reverseArrow={false}
                             collapsed={collapsed}
                             trigger={null}
+                            onMouseEnter={() => onCollapse(false)}
                             // onCollapse={onCollapse}
-                            // onMouseLeave={() => onCollapse(true)}
+                            onMouseLeave={() => onCollapse(true)}
                             style={{
                                 overflow: 'hidden',
-                                height: '100vh',
+                                height: 'calc(100vh - 60px)',
                                 position: 'fixed',
-                                background: '#ddd',
-                                left: 0,
-                                top: 35,
+                                background: '#fff',
+                                left: 6,
+                                top: 41,
                                 width: 40,
                                 zIndex: 10,
+                                borderRadius: 16,
+                                // boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px'
+                                boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px'
                             }}
                         >
-                            <div onClick={() => { onCollapse(!collapsed) }} style={{ justifyContent: 'center', display: 'flex', alignItems: 'center', height: 30, width: 40 }}>
-                                {/* <i className="fa-solid fa-bars-staggered"></i> */}
-                                {collapsed ? <DoubleRightOutlined /> : <DoubleLeftOutlined />}
+                            <div onClick={() => { onCollapse(!collapsed) }} style={{
+                                textAlign: 'center',
+                                display: 'flex',
+                                alignItems: 'center',
+                                padding: "14px 12px",
+                            }}>
+                                <AppstoreOutlined style={{fontSize: 18}} />
+                                <span style={{ marginLeft: 20, color: '#111', fontWeight: 'bold' }}>Menu</span>
                             </div>
-                            <LeftMenu />
+                            <LeftMenu collapsed={collapsed} />
                             <div onClick={() => {
                                 history.push('login');
-                                console.log('dddddd')
                                 dispatch(requestLogout());
                             }} style={{
-                                position: 'absolute', bottom: 35,
+                                position: 'absolute', bottom: 5,
                                 textAlign: 'center',
                                 left: 0, right: 0,
                                 display: 'flex',
@@ -112,13 +121,11 @@ const App = ({ children, title = '' }) => {
                         </Layout.Sider>}
                     <Layout style={{
                         marginLeft: marginContent,
-                        // background: '#f4f5f5',
-                        background: '#fff',
                     }}>
 
                         <LayoutContent style={{
                             margin: '5px 5px',
-                            marginTop: 40,
+                            marginTop: 45,
                             overflowY: 'scroll',
                             borderRadius: 10,
                             height: 'calc(100vh - 35px)',
@@ -128,10 +135,7 @@ const App = ({ children, title = '' }) => {
                         </LayoutContent>
                     </Layout>
                 </Layout>
-
-
             </Layout>
-            {/* <AllAppModal visible={showAllApp} _onClose={() => setShowAllApp(false)} /> */}
         </Wrapper>
     )
 };
@@ -159,42 +163,5 @@ font-size: 14px; */
 
 
 const lang = "route";
-const LeftMenu = React.memo(() => {
-
-    const { t } = useTranslation();
-    const history = useHistory();
-    let { path } = useRouteMatch();
-    // let { pathname } = useLocation();
-    const { userrole } = useSelector(state => state.app)
-    const route = UseRouter()
-    const selectedKeys = React.useMemo(() => {
-        const listKey = route.map(m => `${m.path}`);
-        return listKey.find(i => i === path) || listKey[0]
-    }, [path]);
-
-    return (
-        <Menu
-            // theme="dark"
-            style={{ background: '#ddd', overflow: 'hidden' }}
-            mode="inline"
-            selectedKeys={selectedKeys}
-        >
-            {
-                route.map(route => {
-                    return !route.hidden ?
-                        <Menu.Item
-                            onClick={() => history.push(`${route.path}`)}
-                            key={`${route.path}`}
-                            icon={route.Icon}
-                        >
-                            {t(`${lang}.${route.name}`)}
-                        </Menu.Item> :
-                        null
-                })
-            }
-        </Menu>
-    )
-})
-
 
 export default App;

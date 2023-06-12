@@ -32,7 +32,6 @@ const App = () => {
 
     return (
         <>
-            <GeneralHeader title='Create order' />
 
             <div style={{ padding: '0px 15px' }}>
                 <OrderForm form={form} onFinish={onFinish} />

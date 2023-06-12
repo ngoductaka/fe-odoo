@@ -44,7 +44,6 @@ const App = () => {
     }
     return (
         <div>
-            <GeneralHeader title='Process flow​' />
             <div className="h-screen bg-gray-100 p-4">
                 <div className='h-full bg-white p-4 rounded-md'>
                     <div className='flex mb-3 '>

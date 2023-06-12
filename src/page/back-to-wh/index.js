@@ -50,7 +50,6 @@ const App = () => {
   }
   return (
     <>
-      <GeneralHeader title='Scan Material Back To Warehouse' />
       <div style={{ padding: 10 }}>
         <Form form={form} >
           <Form.Item name={'rfid'} key={'rfid'} style={{ marginTop: 10, marginBottom: 0 }}>

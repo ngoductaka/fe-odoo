@@ -9,6 +9,8 @@ import { isLoginSelector } from 'app_state/login';
 import { createBrowserHistory } from 'history';
 import NotFound from 'page/not_found';
 import './i18next';
+import Layout from 'com/in_app_layout';
+
 
 export const history = createBrowserHistory();
 export const UseRouter = () => {
@@ -48,11 +50,24 @@ export default function RootRouter() {
                         <route.Com />
                     </Route>
                 ))}
-                {route ? route.map(({ exact = true, ...route }) => (
+                {/* {route ? route.map(({ exact = true, ...route }) => (
                     <Route key={route.path} exact={true} path={route.path}>
                         <route.Com />
                     </Route>
-                )) : null}
+                )) : null} */}
+
+<Route path='/' >
+                    <Layout>
+                        <Switch>
+                            {route ? route.map(({ exact = true, ...route }) => (
+                                <Route key={route.path} exact={true} path={route.path}>
+                                    <route.Com />
+                                </Route>
+                            )) : null}
+
+                        </Switch>
+                    </Layout>
+                </Route>
                 <Route path='*' >
                     {isLogin ? <NotFound />: <Redirect to="/login" />}
                 </Route>

@@ -5,8 +5,10 @@ import {
     SettingOutlined,
     TeamOutlined,
     UserOutlined,
+    ProfileOutlined,
     MonitorOutlined,
     InfoCircleOutlined,
+    GroupOutlined,
     FundProjectionScreenOutlined,
     SendOutlined,
     BellOutlined,
@@ -45,19 +47,19 @@ export const ROUTES = {
     // unAuth
     LOGIN: 'login',
     // auth
-    HOME: 'order',
+    HOME: '제품',
 
     ADMIN: 'material-in',
-    INPUT: 'input',
-    ORDER: '',
+    INPUT: '일하다',
+    ORDER: '물류 센터',
     OUT_STOCK: 'out-stock',
-    LAYOUT: 'warehouse-layout',
+    LAYOUT: '보고서',
 
     STATISTIC: 'statistic',
     MACHINE_ANALYTIC: 'machine-analytic',
     PRODUCT_STATISTIC: 'statistics',
     SETTING: 'setting',
-    REPORT: 'report',
+    REPORT: '구성',
     PROFILE: 'profile',
     listOut: 'list-stock-out',
     createOrder: 'create-order',
@@ -77,30 +79,31 @@ export const ROUTES = {
 };
 
 export const private_route = [
-
     {
-        path: `/${ROUTES.ORDER}`,
+        path: `/${ROUTES.HOME}`,
         Com: order,
         exact: true,
+        Icon: <HomeOutlined />,
         name: '제품',
     },
     {
         Com: MaterialList,
         name: '일하다',
         exact: true,
-        Icon: <HomeOutlined />,
+        Icon: <ProfileOutlined />,
         path: `/${ROUTES.INPUT}`,
     },
     {
         Com: AllApp,
         name: '물류 센터',
         exact: true,
-        Icon: <HomeOutlined />,
-        path: `/${ROUTES.HOME}`,
+        Icon: <MonitorOutlined />,
+        path: `/${ROUTES.ORDER}`,
     },
     {
         path: `/${ROUTES.LAYOUT}`,
         Com: WarehouseLayout,
+        Icon: <GroupOutlined />,
         exact: true,
         name: '보고서',
     },
@@ -114,6 +117,7 @@ export const private_route = [
     {
         path: `/${ROUTES.REPORT}`,
         Com: Account,
+        Icon: <BarChartOutlined />,
         exact: true,
         name: '구성',
     },
