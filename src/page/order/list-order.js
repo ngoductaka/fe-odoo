@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Button, Input, Table, Tag } from 'antd';
 import { ArrowRightOutlined, ArrowLeftOutlined, ArrowDownOutlined, PrinterOutlined, PlusCircleOutlined } from '@ant-design/icons';
-import { GeneralHeader } from 'com/app_layout/general_header';
 import { TableCustom } from 'com/table_temp/helper/styled_component';
 import axios from 'axios';
 import _ from 'lodash';
@@ -108,7 +107,7 @@ const App = () => {
                                         value: 'ERP',
                                     },
                                     {
-                                        label: '나누다',
+                                        label: '분류',
                                         value: 'divide',
                                     },
                                     {
@@ -218,18 +217,18 @@ const columns = [
         key: 'ERP',
     },
     {
-        title: '나누다',
+        title: '분류',
         dataIndex: 'divide',
         key: 'divide',
     },
-    {
-        title: '상태',
-        dataIndex: 'situation',
-        key: 'situation',
-        // render: (val) => {
-        //     return <Tag color="success">{val}</Tag>
-        // }
-    },
+    // {
+    //     title: '상태',
+    //     dataIndex: 'situation',
+    //     key: 'situation',
+    //     // render: (val) => {
+    //     //     return <Tag color="success">{val}</Tag>
+    //     // }
+    // },
     {
         title: '재고량',
         dataIndex: 'dry',
@@ -261,18 +260,18 @@ const columns2 = [
     //     key: 'TK',
     // },
     {
-        title: '나누다',
+        title: '분류',
         dataIndex: 'divide',
         key: 'divide',
     },
-    {
-        title: '상태',
-        dataIndex: 'situation',
-        key: 'situation',
-        // render: (val) => {
-        //     return <Tag color="success">{val}</Tag>
-        // }
-    },
+    // {
+    //     title: '상태',
+    //     dataIndex: 'situation',
+    //     key: 'situation',
+    //     // render: (val) => {
+    //     //     return <Tag color="success">{val}</Tag>
+    //     // }
+    // },
     {
         title: '재고량',
         dataIndex: 'dry',

@@ -37,11 +37,8 @@ const Profile = loadable(() => import('page/profile'));
 
 const WarehouseLayout = loadable(() => import('page/stock_layout'));
 const RfidMaterial = loadable(() => import('page/material-rfid'));
-const ConfirmInFactory = loadable(() => import('page/rfid-confirm-in-factory'));
 const listOutStock = loadable(() => import('page/out-stock-list'));
-const createOrder = loadable(() => import('page/create-order'));
 const order = loadable(() => import('page/order/list-order'));
-const orderDetail = loadable(() => import('page/order-detail'));
 
 export const ROUTES = {
     // unAuth
@@ -107,13 +104,6 @@ export const private_route = [
         exact: true,
         name: '보고서',
     },
-    // {
-    //     path: `/${ROUTES.STOCK}`,
-    //     Com: Stock,
-    //     exact: true,
-    //     name: 'stock',
-    //     hidden: true,
-    // },
     {
         path: `/${ROUTES.REPORT}`,
         Com: Account,

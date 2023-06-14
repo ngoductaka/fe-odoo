@@ -17,6 +17,28 @@ const dnd = [
     'barcode',
     'TK',
     'divide',
+];
+const dataStock = [
+    {
+        name: '창고 A',
+        count: 34,
+        type: '물품을 수령하다'
+    },
+    {
+        name: '창고 B',
+        count: 34,
+        type: '내부 이동'
+    },
+    {
+        name: '위험물 보관창고',
+        count: 56,
+        type: '배송 명세서',
+    },
+    {
+        name: '반품 창고',
+        count: 13,
+        type: '반품하다'
+    }
 ]
 const App = () => {
     const [val, setVal] = useState(0);
@@ -28,7 +50,6 @@ const App = () => {
         dataS1(4),
     ]);
     const handleExcelUpload = (data) => {
-
         const [_, ...dataExcel] = data;
         console.log('dataExcel__', dataExcel);
         const dataResult = dataExcel.map((item, index) => {
@@ -52,13 +73,12 @@ const App = () => {
                                 <div
                                     key={i}
                                     onClick={() => setVal(i)}
-                                    className='border-sold border-gray-300 border p-3 rounded-lg mr-5 hover:bg-slate-50 cursor-pointer'>
-                                    <div className='mb-3'>수입품 <span className='text-cyan-700'>({index + 2} 제품 사용)</span></div>
+                                    className='border-sold border-gray-300 border p-3 rounded-lg mr-5 hover:bg-slate-50 cursor-pointer w-64'>
+                                    <div className='mb-3'>{dataStock[i].type}</div>
                                     <div>
-                                        <div>WH/IN/0{index + 1} 2002년 5월 2{index + 1}일</div>
-                                        <div>WH/IN/0{index + 1} 2002년 5월 2{index + 1}일</div>
-                                        <div>WH/IN/0{index + 1} 2002년 5월 2{index + 1}일</div>
-                                        <div>WH/IN/0{index + 1} 2002년 5월 2{index + 1}일</div>
+                                        <div>{dataStock[i].name}</div>
+
+                                        <Button style={{ background: '#3A5BB8', color: '#fff', borderRadius: 7 }}> {dataStock[i].count} 배송 명세서</Button>
                                     </div>
                                 </div>
                             )
@@ -97,7 +117,7 @@ const App = () => {
                                         value: 'TK',
                                     },
                                     {
-                                        label: '나누다',
+                                        label: '분류',
                                         value: 'divide',
                                     },
                                 ]}
@@ -156,16 +176,16 @@ const columns = [
         key: 'TK',
     },
     {
-        title: '나누다',
+        title: '분류',
         dataIndex: 'divide',
         key: 'divide',
     },
     {
-        title: '상태',
+        title: '명령 상태',
         dataIndex: 'situation',
         key: 'situation',
         render: (val) => {
-            return Math.random() > 0.5 ? <Tag color="success">준비가 된</Tag> : <Tag color="error">준비되지 않았다</Tag>
+            return <Tag>{dataFake[((Math.random() * 100).toFixed(0)) % 4]}</Tag>
         }
     },
     {
@@ -176,6 +196,7 @@ const columns = [
     },
 ];
 
+const dataFake = ['주문', "준비된", "준비된", "취소하다"]
 
 function makeid(length) {
     let result = '';

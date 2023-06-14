@@ -28,83 +28,115 @@ class App extends Component {
       panX: false,
       panY: false,
       wheelX: "panX",
-      wheelY: "zoomX"
+      wheelY: "zoomX",
+      layout: root.verticalLayout
     }));
 
 
-    // Add cursor
-    // https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
-    let cursor = chart.set("cursor", am5xy.XYCursor.new(root, {
-      behavior: "zoomX"
-    }));
-    cursor.lineY.set("visible", false);
+    // Add legend
+    // https://www.amcharts.com/docs/v5/charts/xy-chart/legend-xy-series/
+    let legend = chart.children.push(
+      am5.Legend.new(root, {
+        centerX: am5.p50,
+        x: am5.p50
+      })
+    );
 
-    let date = new Date();
-    date.setHours(0, 0, 0, 0);
-    let value = 100;
-
-    function generateData() {
-      value = Math.round((Math.random() * 10 - 5) + value);
-      am5.time.add(date, "day", 1);
-      return {
-        date: date.getTime(),
-        value: value
-      };
-    }
-
-    function generateDatas(count) {
-      let data = [];
-      for (var i = 0; i < count; ++i) {
-        data.push(generateData());
-      }
-      return data;
-    }
+    let data = [{
+      "year": "03",
+      "europe": 2500,
+      "namerica": 2500,
+      "asia": 2100,
+    }, {
+      "year": "04",
+      "europe": 2600,
+      "namerica": 2700,
+      "asia": 2200,
+    }, {
+      "year": "05",
+      "europe": 2800,
+      "namerica": 2900,
+      "asia": 2400,
+    }]
 
 
     // Create axes
     // https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
-    let xAxis = chart.xAxes.push(am5xy.DateAxis.new(root, {
-      maxDeviation: 0,
-      baseInterval: {
-        timeUnit: "day",
-        count: 1
-      },
-      renderer: am5xy.AxisRendererX.new(root, {
-        minGridDistance: 60
-      }),
+    let xRenderer = am5xy.AxisRendererX.new(root, {
+      cellStartLocation: 0.1,
+      cellEndLocation: 0.9
+    })
+
+    let xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
+      categoryField: "year",
+      renderer: xRenderer,
       tooltip: am5.Tooltip.new(root, {})
     }));
 
+    xRenderer.grid.template.setAll({
+      location: 1
+    })
+
+    xAxis.data.setAll(data);
+
     let yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
-      renderer: am5xy.AxisRendererY.new(root, {})
+      renderer: am5xy.AxisRendererY.new(root, {
+        strokeOpacity: 0.1
+      })
     }));
 
 
     // Add series
     // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
-    let series = chart.series.push(am5xy.ColumnSeries.new(root, {
-      name: "Series",
-      xAxis: xAxis,
-      yAxis: yAxis,
-      valueYField: "value",
-      valueXField: "date",
-      tooltip: am5.Tooltip.new(root, {
-        labelText: "{valueY}"
-      })
-    }));
+    function makeSeries(name, fieldName) {
+      let series = chart.series.push(am5xy.ColumnSeries.new(root, {
+        name: name,
+        xAxis: xAxis,
+        yAxis: yAxis,
+        valueYField: fieldName,
+        categoryXField: "year"
+      }));
 
-    series.columns.template.setAll({ strokeOpacity: 0 })
+      series.columns.template.setAll({
+        tooltipText: "{name}, {categoryX}:{valueY}",
+        width: am5.percent(90),
+        tooltipY: 0,
+        strokeOpacity: 0
+      });
+
+      series.data.setAll(data);
+
+      // Make stuff animate on load
+      // https://www.amcharts.com/docs/v5/concepts/animations/
+      series.appear();
+
+      series.bullets.push(function () {
+        return am5.Bullet.new(root, {
+          locationY: 0,
+          sprite: am5.Label.new(root, {
+            text: "{valueY}",
+            fill: root.interfaceColors.get("alternativeText"),
+            centerY: 0,
+            centerX: am5.p50,
+            populateText: true
+          })
+        });
+      });
+
+      legend.data.push(series);
+    }
+
+    makeSeries("창고 A", "europe");
+    makeSeries("창고 B", "namerica");
+    makeSeries("위험물 보관창고", "asia");
+    // makeSeries("Latin America", "lamerica");
+    // makeSeries("Middle East", "meast");
+    // makeSeries("Africa", "africa");
 
 
-    // Add scrollbar
-    // https://www.amcharts.com/docs/v5/charts/xy-chart/scrollbars/
-    chart.set("scrollbarX", am5.Scrollbar.new(root, {
-      orientation: "horizontal"
-    }));
-
-    let data = generateDatas(50);
-    series.data.setAll(data);
-
+    // Make stuff animate on load
+    // https://www.amcharts.com/docs/v5/concepts/animations/
+    chart.appear(1000, 100);
 
     // Make stuff animate on load
     // https://www.amcharts.com/docs/v5/concepts/animations/
@@ -119,7 +151,7 @@ class App extends Component {
   }
 
   render() {
-    return <div id="chartdiv4" style={{ width: "100%", height: "60vh",  margin: "20px" }}></div>;
+    return <div id="chartdiv4" style={{ width: "100%", height: "60vh", margin: "20px" }}></div>;
   }
 }
 

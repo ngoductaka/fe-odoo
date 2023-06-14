@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { dataMaterial } from 'assets/data/material';
 import _, { shuffle } from 'lodash';
 
+
 import { Button, DatePicker, Input, Table, Tabs } from 'antd';
 import { ArrowRightOutlined, ArrowLeftOutlined, ArrowDownOutlined, PrinterOutlined } from '@ant-design/icons';
 import { GeneralHeader } from 'com/app_layout/general_header';
@@ -14,7 +15,10 @@ import PerChart from './chart/per';
 import ColChart from './chart/col';
 import ChartDonut from './chart/donut';
 import ChartDonut2 from './chart/donut2';
+import XY from './chart/xy';
 import BtnUpload from 'com/BtnUpload';
+import { DownloadExcelBtn } from 'com/excel/gen_excel';
+const { RangePicker } = DatePicker;
 
 const Setting = () => {
     return (
@@ -47,23 +51,27 @@ export default Setting;
 const Report3 = () => {
     return (
         <div>
+            <div className='flex justify-between px-10'>
+                <div style={{fontSize: 18}}>Report Chart</div>
+                <RangePicker />
+            </div>
             <div className='flex'>
                 <div className='flex-1 p-20'>
-                    <ChartDonut />
+                    <XY />
                 </div>
                 <div className='flex-1 p-20'>
+                    <PieChart />
+                </div>
+            </div>
+            <div className='flex'>
+                <div className='flex-1'>
+                    <ChartDonut />
+                </div>
+                <div className='flex-1'>
                     <ColChart />
                 </div>
             </div>
             {/* <div className='flex'>
-                <div className='flex-1'>
-                    <PerChart />
-                </div>
-                <div className='flex-1'>
-                    <ChartDonut2 />
-                </div>
-            </div>
-            <div className='flex'>
                 <div className='flex-1'>
                     <PieChart />
                 </div>
@@ -87,8 +95,78 @@ const Report1 = () => {
                     </div>
                     <div>
                         <Button style={{ background: '#3A5BB8', color: '#fff' }}> 데이터를 얻다</Button>
-                        <a href={`${LOCAL}/download/report1.xlsx`} download><Button className='mr-2 ml-2'> <ArrowDownOutlined /> 다운로드</Button></a>
-                        <a href={`${LOCAL}/download/report1.xlsx`} download><Button icon={<PrinterOutlined />}>인쇄기</Button></a>
+                        <DownloadExcelBtn
+                            element={<Button className='mr-2 ml-2'> <ArrowDownOutlined /> 다운로드.</Button>}
+                            data={data}
+                            format={[
+                                {
+                                    label: '유형',
+                                    value: 'type1',
+                                },
+                                {
+                                    label: '숫자',
+                                    value: 'num1',
+                                },
+                                {
+                                    label: '낮',
+                                    value: 'afternoon1',
+                                },
+                                {
+                                    label: '시리즈',
+                                    value: 'type2',
+                                },
+                                {
+                                    label: '숫자',
+                                    value: 'num2',
+                                },
+                                {
+                                    label: '낮',
+                                    value: 'afternoon2',
+                                },
+                                {
+                                    label: '설명하다',
+                                    value: 'note',
+                                },
+                                {
+                                    label: 'ERP코드',
+                                    value: 'ERP',
+                                },
+                                {
+                                    label: '산업화, 재료',
+                                    value: 'name',
+                                },
+                                {
+                                    label: '기간 초 재고',
+                                    value: 'inventory',
+                                },
+                                {
+                                    label: '프로덕션에서 가져오기',
+                                    value: 'num3',
+                                },
+                                {
+                                    label: '다른 항목 입력',
+                                    value: 'num4',
+                                },
+                                {
+                                    label: '프로덕션용으로 내보내기',
+                                    value: 'num5',
+                                },
+                                {
+                                    label: '수출 파괴',
+                                    value: 'num6',
+                                },
+                                {
+                                    label: '수출 클레임',
+                                    value: 'num7',
+                                },
+                                {
+                                    label: '기타 수출',
+                                    value: 'note2',
+                                },
+                            ]}
+                        />
+                        {/* <Button className='mr-2 ml-2'> <ArrowDownOutlined /> 다운로드</Button> */}
+                        <Button onClick={() => window.print()} icon={<PrinterOutlined />}>인쇄기</Button>
                         <BtnUpload />
                     </div>
                 </div>
@@ -262,8 +340,54 @@ const Report2 = () => {
                     </div>
                     <div>
                         <Button style={{ background: '#3A5BB8', color: '#fff' }}> 데이터를 얻다</Button>
-                        <a href={`${LOCAL}/download/report2.xlsx`} download><Button className='mr-2 ml-2'> <ArrowDownOutlined /> 다운로드</Button> </a>
-                        <a href={`${LOCAL}/download/report2.xlsx`} download><Button icon={<PrinterOutlined />}>인쇄기</Button> </a>
+
+                        <DownloadExcelBtn
+                            element={<Button className='mr-2 ml-2'> <ArrowDownOutlined /> 다운로드.</Button>}
+                            data={data}
+                            format={[
+                                {
+                                    label: '제조일자',
+                                    value: 'date',
+                                },
+                                {
+                                    label: '위치',
+                                    value: 'location',
+                                },
+                                {
+                                    label: '구분',
+                                    value: 'phancong',
+                                },
+                                {
+                                    label: 'ERP code',
+                                    value: 'ERP',
+                                },
+                                {
+                                    label: '품명',
+                                    value: 'name',
+                                },
+                                {
+                                    label: 'RD code',
+                                    value: 'bar',
+                                },
+                                {
+                                    label: '특이사항',
+                                    value: 'num1',
+                                },
+                                {
+                                    label: 'lot no.',
+                                    value: 'num2',
+                                },
+                                {
+                                    label: '출고',
+                                    value: 'num3',
+                                },
+                                {
+                                    label: 'Note',
+                                    value: 'note',
+                                },
+                            ]}
+                        />
+                        <Button onClick={() => window.print()} icon={<PrinterOutlined />}>인쇄기</Button>
                         <BtnUpload />
                     </div>
                 </div>
@@ -296,7 +420,6 @@ const Report2 = () => {
 const columns2 = [
     {
         title: '제조일자',
-
         dataIndex: 'date',
         key: 'date',
 
