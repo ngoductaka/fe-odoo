@@ -187,7 +187,7 @@ const RenderMap = React.memo(({ data: areaData, onOkModal }) => {
         getLocation();
         const interval = setInterval(() => {
             getLocation();
-        }, 1000*5)
+        }, 1000 * 5)
         return () => {
             clearInterval(interval);
             setSelect(false)
@@ -251,38 +251,16 @@ const RenderMap = React.memo(({ data: areaData, onOkModal }) => {
                 <Tag color="success">{areaData.row * areaData.column - unAvailableCount} Available</Tag>
                 <Tag color="error">{unAvailableCount} Unavailable</Tag>
             </p>
-            {_.isEmpty(curSelect) ? null :
-                <Dropdown overlay={
-                    <div style={{ border: '1px solid #ccc', borderRadius: 5 }}>
-                        <Menu>
-                            <Menu.Item onClick={() => {
-                                setSelect(curSelect)
-                                setReloadMaterialList(true)
-                            }}>Set material to position</Menu.Item>
-                            <Menu.Item onClick={() => {
-                                Modal.confirm({
-                                    title: 'Confirm remove',
-                                    icon: <ExclamationCircleOutlined />,
-                                    content: `Remove item in: ${curSelect} `,
-                                    onOk: _handleDelete
-                                });
-                            }
-                            }>Free Location</Menu.Item>
-                        </Menu>
-                    </div>
-                }>
-                    <Button type="primary" style={{ borderRadius: 5 }}>
-                        <Space>
-                            Select action
-                            <DownOutlined />
-                        </Space>
-                    </Button>
-                </Dropdown>
-            }
+            
+            <div className='flex'>
+                    <div className='flex'> 비어 있다: <div className='ml-2' style={{ background: 'green', height: 20, width: 40, borderRadius: 6}}/>  </div>
+                    <div className='flex mx-6'> 비어 있지 않다: <div className='ml-2' style={{ background: 'red', height: 20, width: 40, borderRadius: 6}}/>  </div>
+                    <div className='flex'> 상품이 있습니다: <div className='ml-2' style={{ background: '#c9c909', height: 20, width: 40, borderRadius: 6}}/>  </div>
+                </div>
         </div>
         <div style={{ overflow: 'scroll', minHeight: 'calc(100vh - 180px)' }}>
             {dataMap.map((row, rowInd) => (
-                <div key={rowInd + ''} style={{ display: 'flex', }}>
+                <div key={rowInd + ''} style={{ display: 'flex', flexWrap: 'nowrap' }}>
                     {row.map((col, colInd) => {
                         const position = `${(colInd + 1) + (rowInd * areaData.column)}`.padStart(3, '0');
                         const locationPick = `${areaData.name}-${position}`.padStart(3, '0');
@@ -308,9 +286,9 @@ const RenderMap = React.memo(({ data: areaData, onOkModal }) => {
                                                             {key}
                                                         </Tag>
                                                         <Popover title={dataItem[key].join(',')}>
-                                                        <Tag>
-                                                            {dataItem[key].length}
-                                                        </Tag>
+                                                            <Tag>
+                                                                {dataItem[key].length}
+                                                            </Tag>
                                                         </Popover>
                                                     </div>
                                                 )
@@ -374,9 +352,9 @@ const RenderMap = React.memo(({ data: areaData, onOkModal }) => {
 const Box = styled.div`
 
 min-height: 5vh;
- /* min-width: 13vh; */
+ min-width: 100px;
  padding: 0px 8px;
-  background: ${({ available, selected }) => selected ? '#c9c909' : (available ? 'green' : 'red')};
+  background: ${({ available, selected }) => selected ? '#c9c909' : (available ? 'green' : '#c9c909')};
    margin: 0.5vh;
    border: 1px solid #eee;
    border-radius: 5px;

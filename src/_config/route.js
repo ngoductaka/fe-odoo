@@ -47,7 +47,7 @@ export const ROUTES = {
     // unAuth
     LOGIN: 'login',
     // auth
-    HOME: '제품',
+    HOME: '',
 
     ADMIN: 'material-in',
     INPUT: '일하다',

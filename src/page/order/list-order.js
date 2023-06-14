@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Button, Input, Table, Tag } from 'antd';
-import { ArrowRightOutlined, ArrowLeftOutlined, ArrowDownOutlined, PrinterOutlined } from '@ant-design/icons';
+import { ArrowRightOutlined, ArrowLeftOutlined, ArrowDownOutlined, PrinterOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import { GeneralHeader } from 'com/app_layout/general_header';
 import { TableCustom } from 'com/table_temp/helper/styled_component';
 import axios from 'axios';
@@ -90,7 +90,7 @@ const App = () => {
                             <Input.Search style={{ width: 600 }} />
                             <div />
                         </div>
-                        <div>
+                        <div className='flex'>
                             <DownloadExcelBtn
                                 element={<Button className='mr-2 ml-2'> <ArrowDownOutlined /> 다운로드.</Button>}
                                 data={data}
@@ -123,6 +123,8 @@ const App = () => {
                             />
                             <Button onClick={() => { window.print(); }} icon={<PrinterOutlined />}>인쇄기</Button>
                             <BtnUpload handleFile={handleExcelUpload} />
+                            <Button icon={<PlusCircleOutlined />}>추가로 만들다</Button>
+
                         </div>
                     </div>
                     <TableCustom
