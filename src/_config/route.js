@@ -47,7 +47,7 @@ export const ROUTES = {
     HOME: '',
 
     ADMIN: 'material-in',
-    INPUT: '일하다',
+    INPUT: 'warehouse-input',
     ORDER: '물류 센터',
     OUT_STOCK: 'out-stock',
     LAYOUT: '보고서',
@@ -85,7 +85,7 @@ export const private_route = [
     },
     {
         Com: MaterialList,
-        name: '일하다',
+        name: 'Nhập Kho',
         exact: true,
         Icon: <ProfileOutlined />,
         path: `/${ROUTES.INPUT}`,

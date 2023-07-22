@@ -19,8 +19,6 @@ import { LeftMenu } from './left_menu';
 
 const App = ({ children, title = '' }) => {
     const [collapsed, onCollapse] = React.useState(true);
-    const [showAllApp, setShowAllApp] = React.useState(false);
-    const User = useSelector(state => get(state, 'app.user', {}));
     const [showSider, setShowSider] = React.useState(true)
     const [marginContent, setMaginContent] = React.useState(55)
     const dispatch = useDispatch();

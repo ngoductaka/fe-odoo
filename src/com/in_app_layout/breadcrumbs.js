@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { apiClient } from 'helper/request/api_client';
+import { MAP_TITLE } from '_config/constant';
 
 export const Breadcrumbs = () => {
     const history = useHistory();
@@ -31,7 +32,7 @@ export const Breadcrumbs = () => {
                     if (!pathName) return null;
                     return (
                         <Breadcrumb.Item key={pathName} onClick={() => index !== list.length - 1 && history.push(`/${pathName}/`)}>
-                            <span style={{ textTransform: 'capitalize' }}>{pathName}</span>
+                            <b style={{ textTransform: 'capitalize' }}>{MAP_TITLE[pathName] || pathName}</b>
                         </Breadcrumb.Item>
                     )
                 })}

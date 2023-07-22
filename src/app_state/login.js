@@ -11,6 +11,7 @@ import {
 import { authServices } from './services';
 import { ACCESS_TOKEN, REFRESH_TOKEN, SERVER_URL } from '../_config/storage_key';
 import _ from 'lodash';
+import { apiRPC } from 'helper/request/rpc_proxy';
 
 const ROLE = {
     ADMIN: 13,
@@ -55,18 +56,10 @@ const { loginRequest, loginSuccess, loginFail, logout } = slice.actions;
 export const requestLogin = (body) => async (dispatch) => {
     try {
         dispatch(loginRequest());
+        const { data } = await apiRPC.post('/login', body);
+        localStorage.setItem('odoo_id', data.uid);
 
-        const { data } = await authServices.handleLogin(body);
-        try {
-            data.template = JSON.parse(data.template);
-        } catch (err) {
-            data.template = {}
-        }
         await dispatch(loginSuccess(data));
-        localStorage.setItem(ACCESS_TOKEN, data.access_token);
-        localStorage.setItem(REFRESH_TOKEN, data.refresh_token);
-        localStorage.setItem(SERVER_URL, data.url);
-
         openNotificationWithIcon("success", data.msg);
         return data;
     } catch (err) {

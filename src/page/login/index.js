@@ -12,6 +12,7 @@ import { images } from "../../helper/static/images";
 import { requestLogin, isLoginSelector } from "../../app_state/login";
 import { ROUTES } from "../../_config/route";
 import { LanguageIcon } from "com/app_layout/general_header/right_item_bar";
+import { ODOO_PORT, ODOO_URL } from "_config/constant";
 const login = "login";
 const { logo, bg } = images;
 
@@ -28,14 +29,18 @@ const SignInPage = (props) => {
 
     const onLogin = async () => {
         try {
-
-            const body = { username, password: pwd };
+            const body = {
+                username,
+                password: pwd,
+                "port": ODOO_PORT,
+                "host": ODOO_URL,
+                "db": "cuulong"
+            };
             setLoading(true);
             const result = await dispatch(requestLogin(body));
             setLoading(false);
             if (result) {
-                // console.log('resul222t', result);
-                history.push(result?.userrole == 3 ? `/${ROUTES.Monitor}` : `/${ROUTES.HOME}`)
+                history.push(`/${ROUTES.HOME}`)
             }
         } catch (err) {
 
@@ -49,7 +54,7 @@ const SignInPage = (props) => {
         >
             <div className="flex-1 flex center items-center justify-center" style={{ background: '#3A5BB8' }}>
                 <div className="flex-col flex items-center justify-center">
-                    <span className="text-white text-3xl font-bold">관리 솔루션 및 생산</span>
+                    <span className="text-white text-3xl font-bold">Quản lý kho</span>
                     <img src={images.loginBg} className="" />
                 </div>
             </div>
@@ -59,16 +64,16 @@ const SignInPage = (props) => {
                         <img src={images.anyone_logo} />
                     </div>
                     <div>
-                        <p className="text-2xl font-bold mt-10">로그인</p>
-                        <p className="text-base -mt-4">시스템에 액세스하려면 로그인하십시오.</p>
+                        <p className="text-2xl font-bold mt-10">Login</p>
+                        <p className="text-base -mt-4">Wellcome back.</p>
                     </div>
 
                     <div>
                         <div>
                             <div style={{ marginTop: 60 }}>
-                                <div style={{ width: 130, zIndex: 3, fontSize: 16 }}>계정</div>
+                                <div style={{ width: 130, zIndex: 3, fontSize: 16 }}>Username</div>
                                 <Input
-                                    placeholder={'계정을 입력하세요'}
+                                    placeholder={'Username'}
                                     style={{ width: 400 }}
                                     value={username}
                                     onChange={e => setUsername(e.target.value)}
@@ -81,9 +86,9 @@ const SignInPage = (props) => {
                                 <span style={{ width: 130 }}></span>
                             </div>
                             <div style={{ marginTop: 20 }}>
-                                <div style={{ width: 130, zIndex: 3, fontSize: 16 }}>{'비밀번호'}</div>
+                                <div style={{ width: 130, zIndex: 3, fontSize: 16 }}>{'Password'}</div>
                                 <Input.Password
-                                    placeholder={'비밀번호를 입력하세요'}
+                                    placeholder={'Password'}
                                     style={{ width: 400 }}
                                     value={pwd}
                                     onChange={e => setPwd(e.target.value)}
@@ -98,7 +103,7 @@ const SignInPage = (props) => {
                             <Button 
                             loading={loading}
 onClick={onLogin}
-                            className="text-white mt-5 w-full" style={{background: '#3A5BB8', color: '#fff'}}>비밀번호를 입력하세요</Button>
+                            className="text-white mt-5 w-full" style={{background: '#3A5BB8', color: '#fff'}}>Login</Button>
                         </div>
                     </div>
                 </div>

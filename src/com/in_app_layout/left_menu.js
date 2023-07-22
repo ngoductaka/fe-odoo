@@ -16,15 +16,7 @@ export const LeftMenu = React.memo(({ collapsed }) => {
 
     const { t } = useTranslation();
     const history = useHistory();
-    let { path } = useRouteMatch();
-    // let { pathname } = useLocation();
-    const { userrole } = useSelector(state => state.app)
     const route = UseRouter()
-    const selectedKeys = React.useMemo(() => {
-        const listKey = route.map(m => `${m.path}`);
-        return listKey.find(i => i === path) || listKey[0]
-    }, [path]);
-
 
     const items = useMemo(() => {
         const menu = []
@@ -53,7 +45,7 @@ export const LeftMenu = React.memo(({ collapsed }) => {
         <Menu
             // theme="dark"
             mode="inline"
-        // selectedKeys={selectedKeys}
+            // selectedKeys={selectedKeys}
         >
             {
                 route.map(route => {

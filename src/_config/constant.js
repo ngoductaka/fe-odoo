@@ -19,6 +19,16 @@ export const MONGO_SERVER_1 = 'http://20.115.75.139:3200/v1'
 export const LOCAL = `http://${window.location.host.split(':')[0]}:3909`;
 // export const MONGO_SERVER = 'http://localhost:3200/v1'
 
+
+// odoo
+export const RPC_PROXY = `http://${window.location.host.split(':')[0]}:3002`;
+export const ODOO_URL = 'cuulong.rostek.space'
+export const ODOO_PORT = 443
+
+export const MAP_TITLE = {
+    'warehouse-input': "Nhập Kho"
+};
+
 export const map_color = {
     'bad': '#F60020',
     'good': '#21983F',

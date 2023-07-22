@@ -14,23 +14,10 @@ import Layout from 'com/in_app_layout';
 
 export const history = createBrowserHistory();
 export const UseRouter = () => {
-    const userRole = useSelector(state => _.get(state, 'app.user.userrole', {}));
     const route = useMemo(() => {
-        try {
-            if (!userRole) return [];
-            
-            if (userRole === 13) {
-                return private_route;
-            } else {
-                // return MAP_ROLE[2];
-            }
-        } catch (err) {
-            // return private_route
-        }
-    }, [userRole])
-
+        return private_route
+    }, [])
     return route;
-
 };
 export default function RootRouter() {
     const dispatch = useDispatch();
