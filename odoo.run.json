@@ -1,0 +1,9 @@
+{
+    "apps": [
+        {
+            "name": "cuulong odoo_proxy 3002",
+            "script": "npm",
+            "args": "run odoo"
+        }
+    ]
+}
