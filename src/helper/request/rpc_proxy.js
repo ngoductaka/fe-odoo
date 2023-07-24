@@ -1,4 +1,5 @@
 import axios from "axios";
+import { notification } from "antd";
 import { createBrowserHistory } from 'history';
 import { AccountServer, RPC_PROXY } from "_config/constant";
 
@@ -35,6 +36,9 @@ export const apiRPC = {
   },
   call: (data) => {
     const id = localStorage.getItem('odoo_id');
+    if(!id) {
+      history.push('/login');
+    }
     return request({
       method: "post",
       url: `/api/${id}`,
@@ -42,6 +46,11 @@ export const apiRPC = {
     })
       .then((response) => response)
       .catch((err) => {
+        notification.error({
+          message: "Error",
+          description: err.message,
+        });
+        history.push('/login');
         throw err;
       });
   },

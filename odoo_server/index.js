@@ -4,7 +4,7 @@ const cors = require('cors');
 const odooClient = require('./odoo');
 
 // 
-app = express();
+const app = express();
 // config body-parser (parse body) req.body
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())

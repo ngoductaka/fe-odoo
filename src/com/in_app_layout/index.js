@@ -12,7 +12,6 @@ import { Breadcrumbs } from './breadcrumbs';
 import { Items } from './right_item_bar';
 import { Wrapper } from './styled';
 import styled from 'styled-components';
-import { UseRouter } from 'rootRouter';
 import { LeftMenu } from './left_menu';
 
 
@@ -25,6 +24,10 @@ const App = ({ children, title = '' }) => {
 
     const history = useHistory();
     useEffect(() => {
+        const id = localStorage.getItem('odoo_id');
+        if (!id) {
+            history.push('/login');
+        }
         if (window.innerWidth < 416) {
             setShowSider(false)
             setMaginContent(0)
@@ -50,7 +53,7 @@ const App = ({ children, title = '' }) => {
                                 // width: 40,
                                 height: 35,
                             }}>
-                            <img src={images.anyone_logo} alt="logo" style={{ height: 25, marginLeft: 1}} />
+                            <img src={images.anyone_logo} alt="logo" style={{ height: 25, marginLeft: 1 }} />
                         </div>
 
                         <div style={{ margin: '1px 10px' }}>
@@ -98,7 +101,7 @@ const App = ({ children, title = '' }) => {
                                 alignItems: 'center',
                                 padding: "14px 12px",
                             }}>
-                                <AppstoreOutlined style={{fontSize: 18}} />
+                                <AppstoreOutlined style={{ fontSize: 18 }} />
                                 <span style={{ marginLeft: 20, color: '#111', fontWeight: 'bold' }}>Menu</span>
                             </div>
                             <LeftMenu collapsed={collapsed} />

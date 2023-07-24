@@ -20,15 +20,9 @@ export const UseRouter = () => {
     return route;
 };
 export default function RootRouter() {
-    const dispatch = useDispatch();
     const route = UseRouter();
 
     const isLogin = useSelector(isLoginSelector);
-    useEffect(() => {
-        dispatch(fetchMasterData());
-        dispatch(fetchItemCodeData());
-        dispatch(fetchLocations());
-    }, [dispatch]);
     return (
         <Router>
             <Switch>
@@ -43,7 +37,7 @@ export default function RootRouter() {
                     </Route>
                 )) : null} */}
 
-<Route path='/' >
+                <Route path='/' >
                     <Layout>
                         <Switch>
                             {route ? route.map(({ exact = true, ...route }) => (
@@ -56,7 +50,7 @@ export default function RootRouter() {
                     </Layout>
                 </Route>
                 <Route path='*' >
-                    {isLogin ? <NotFound />: <Redirect to="/login" />}
+                    {isLogin ? <NotFound /> : <Redirect to="/login" />}
                 </Route>
             </Switch>
         </Router>
