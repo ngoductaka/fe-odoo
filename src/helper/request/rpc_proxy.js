@@ -36,8 +36,8 @@ export const apiRPC = {
   },
   call: (data) => {
     const id = localStorage.getItem('odoo_id');
-    if(!id) {
-      history.push('/login');
+    if (!id) {
+      window.location.href = window.origin + '/login';
     }
     return request({
       method: "post",
@@ -50,7 +50,7 @@ export const apiRPC = {
           message: "Error",
           description: err.message,
         });
-        history.push('/login');
+        window.location.href = window.origin + '/login';
         throw err;
       });
   },

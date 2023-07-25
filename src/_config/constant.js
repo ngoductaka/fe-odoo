@@ -26,7 +26,8 @@ export const ODOO_URL = 'test.rostek.space'
 export const ODOO_PORT = 443
 
 export const MAP_TITLE = {
-    'warehouse-input': "Kho Nguyên vật liệu: Nhận hàng "
+    '/': "Kho Nguyên vật liệu: Nhận hàng ",
+    '': "Kho Nguyên vật liệu: Nhận hàng "
 };
 
 export const map_color = {

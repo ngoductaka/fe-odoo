@@ -78,39 +78,39 @@ export const ROUTES = {
 export const private_route = [
     {
         path: `/${ROUTES.HOME}`,
-        Com: order,
+        Com: MaterialList,
         exact: true,
         Icon: <HomeOutlined />,
-        name: '제품',
-    },
-    {
-        Com: MaterialList,
         name: 'Nhập Kho',
-        exact: true,
-        Icon: <ProfileOutlined />,
-        path: `/${ROUTES.INPUT}`,
     },
-    {
-        Com: AllApp,
-        name: '물류 센터',
-        exact: true,
-        Icon: <MonitorOutlined />,
-        path: `/${ROUTES.ORDER}`,
-    },
-    {
-        path: `/${ROUTES.LAYOUT}`,
-        Com: WarehouseLayout,
-        Icon: <GroupOutlined />,
-        exact: true,
-        name: '보고서',
-    },
-    {
-        path: `/${ROUTES.REPORT}`,
-        Com: Account,
-        Icon: <BarChartOutlined />,
-        exact: true,
-        name: '구성',
-    },
+    // {
+    //     Com: MaterialList,
+    //     name: 'Nhập Kho',
+    //     exact: true,
+    //     Icon: <ProfileOutlined />,
+    //     path: `/${ROUTES.INPUT}`,
+    // },
+    // {
+    //     Com: AllApp,
+    //     name: '물류 센터',
+    //     exact: true,
+    //     Icon: <MonitorOutlined />,
+    //     path: `/${ROUTES.ORDER}`,
+    // },
+    // {
+    //     path: `/${ROUTES.LAYOUT}`,
+    //     Com: WarehouseLayout,
+    //     Icon: <GroupOutlined />,
+    //     exact: true,
+    //     name: '보고서',
+    // },
+    // {
+    //     path: `/${ROUTES.REPORT}`,
+    //     Com: Account,
+    //     Icon: <BarChartOutlined />,
+    //     exact: true,
+    //     name: '구성',
+    // },
 ];
 
 export const MAP_ROLE = {

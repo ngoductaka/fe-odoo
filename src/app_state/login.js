@@ -63,6 +63,7 @@ export const requestLogin = (body) => async (dispatch) => {
         openNotificationWithIcon("success", data.msg);
         return data;
     } catch (err) {
+        openNotificationWithIcon("error", err.message);
         console.log("err ", err.response);
         handleErr(err);
         dispatch(loginFail())
