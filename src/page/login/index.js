@@ -61,7 +61,7 @@ const SignInPage = (props) => {
             <div className="flex-1 flex flex-col items-center">
                 <div>
                     <div className="flex justify-center items-center mt-20">
-                        <img src={images.anyone_logo} />
+                        {/* <img src={images.anyone_logo} /> */}
                     </div>
                     <div>
                         <p className="text-2xl font-bold mt-10">Login</p>

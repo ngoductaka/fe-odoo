@@ -53,7 +53,7 @@ const App = ({ children, title = '' }) => {
                                 // width: 40,
                                 height: 35,
                             }}>
-                            <img src={images.anyone_logo} alt="logo" style={{ height: 25, marginLeft: 1 }} />
+                            {/* <img src={images.anyone_logo} alt="logo" style={{ height: 25, marginLeft: 1 }} /> */}
                         </div>
 
                         <div style={{ margin: '1px 10px' }}>
