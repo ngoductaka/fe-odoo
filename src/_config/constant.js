@@ -22,8 +22,9 @@ export const LOCAL = `http://${window.location.host.split(':')[0]}:3909`;
 
 // odoo
 export const RPC_PROXY = `http://${window.location.host.split(':')[0]}:3002`;
-export const ODOO_URL = 'test.rostek.space'
+export const ODOO_URL = 'cuulong.rostek.space'
 export const ODOO_PORT = 443
+export const ODOO_DB = "cuulong-v1"
 
 export const MAP_TITLE = {
     '/': "Kho Nguyên vật liệu: Nhận hàng ",

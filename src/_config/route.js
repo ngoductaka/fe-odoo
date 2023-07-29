@@ -13,6 +13,7 @@ import {
     SendOutlined,
     BellOutlined,
     SnippetsOutlined,
+    DownOutlined,
 } from '@ant-design/icons';
 
 import loadable from '../helper/router/loadable';
@@ -39,6 +40,7 @@ const WarehouseLayout = loadable(() => import('page/stock_layout'));
 const RfidMaterial = loadable(() => import('page/material-rfid'));
 const listOutStock = loadable(() => import('page/out-stock-list'));
 const order = loadable(() => import('page/order/list-order'));
+const Home = loadable(() => import('page/home'));
 
 export const ROUTES = {
     // unAuth
@@ -78,9 +80,16 @@ export const ROUTES = {
 export const private_route = [
     {
         path: `/${ROUTES.HOME}`,
-        Com: MaterialList,
+        Com: Home,
         exact: true,
         Icon: <HomeOutlined />,
+        name: 'Nhập Kho',
+    },
+    {
+        path: `/${ROUTES.INPUT}`,
+        Com: MaterialList,
+        exact: true,
+        Icon: <DownOutlined />,
         name: 'Nhập Kho',
     },
     // {
@@ -116,7 +125,7 @@ export const private_route = [
 export const MAP_ROLE = {
     2: [
         {
-            Com: AllApp,
+            Com: Home,
             name: 'All process',
             exact: true,
             Icon: <HomeOutlined />,

@@ -50,7 +50,7 @@ app.use('/login', async (req, res) => {
         })
 
     } catch (err) {
-        res.json({
+        res.status(500).json({
             msg: err.message
         })
     }
@@ -65,7 +65,7 @@ app.use('/api/:uid', async (req, res) => {
         const result = await odoo.callMethod(model, method, params);
         res.json(result)
     } catch (err) {
-        res.json({
+        res.status(500).json({
             msg: err.message
         })
     };

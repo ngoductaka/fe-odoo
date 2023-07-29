@@ -92,22 +92,22 @@ module.exports = odoo;
 
 // const password = 'admin';
 
-const fn = async () => {
-    await odoo.config(
-        {
-            host, port, path
-        }
-    )
-    const data = await odoo.login(
-        {
-            db, username, password
-        }
-    )
-    // const result = await callMethod
-    //                 console.log('Matching records:', result);
-    const result = await odoo.callMethod('stock.picking', 'web_search_read', [[
-        //                 // 'picking_type_id', '=', 1
-    ], ["activity_exception_icon", "company_id", "priority", "name", "location_id"], 0, 3]);
+// const fn = async () => {
+//     await odoo.config(
+//         {
+//             host, port, path
+//         }
+//     )
+//     const data = await odoo.login(
+//         {
+//             db, username, password
+//         }
+//     )
+//     // const result = await callMethod
+//     //                 console.log('Matching records:', result);
+//     const result = await odoo.callMethod('stock.picking', 'web_search_read', [[
+//         //                 // 'picking_type_id', '=', 1
+//     ], ["activity_exception_icon", "company_id", "priority", "name", "location_id"], 0, 3]);
 
-    console.log('result', result)
-}
+//     console.log('result', result)
+// }

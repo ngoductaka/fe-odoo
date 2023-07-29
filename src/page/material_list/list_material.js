@@ -1,7 +1,7 @@
 import React, { useMemo, useState, useEffect } from 'react';
 import _ from 'lodash';
 import moment from 'moment';
-import { Input, InputNumber, Select, Form, Table, Button, Skeleton, notification } from 'antd';
+import { Input, InputNumber, Select, Form, Table, Button, Skeleton, notification, Radio } from 'antd';
 import { apiRPC } from 'helper/request/rpc_proxy';
 import { PlusCircleFilled, PlusCircleOutlined } from '@ant-design/icons';
 import './App.scss';
@@ -100,9 +100,23 @@ const columnsRender = ({ prod }) => [
         }
     },
     {
-        title: 'Mô tả',
+        title: 'Vị trí',
         dataIndex: 'note',
         key: 'note',
+        render: (text, record) => {
+            return (
+                <Form.Item
+                    name={`note_${record.key}`}
+                >
+                    <Input />
+                </Form.Item>
+            )
+        }
+    },
+    {
+        title: 'Tên gói',
+        dataIndex: 'pack',
+        key: 'pack',
         render: (text, record) => {
             return (
                 <Form.Item
@@ -234,12 +248,31 @@ const App = () => {
         <div>
             <Form form={form}>
                 <div className="h-screen bg-gray-100 p-4">
-                    <div className='h-full bg-white p-4 rounded-md'>
+                    <div className='h-full w-full bg-white p-4 rounded-md'>
                         <div className='flex mt-2 border-b mb-2'>
-                            {orderDetail && <div>
-                                <h3>Kho Nguyên Vật Liệu: Nhận Hàng: {orderDetail?.display_name}</h3>
+                            {<div className='mb-3 font-semibold text-lg' style={{ fontSize: '3em' }}>
+                                <h3 >Xuất nhập kho</h3>
                             </div>}
                         </div>
+                        <div className='flex justify-between items-center'>
+                            <div className=''>
+                                <div className='mb-3 font-semibold text-lg' style={{ fontSize: '1.5em' }}> Chọn kho</div>
+                                <div>
+                                    <Select style={{ width: 250, fontSize: '1.5em', height: '2em' }}>
+                                        <Select.Option value="1">Kho nguyên vật liệu</Select.Option>
+                                        <Select.Option value="2">Kho Dư</Select.Option>
+                                        <Select.Option value="3">Kho sản phẩm</Select.Option>
+                                    </Select>
+                                </div>
+                            </div>
+                            <div>
+                                <Radio.Group defaultValue="c" buttonStyle="solid" style={{ marginTop: 16 }}>
+                                    <Radio.Button style={{height: 70, width: 170}} value="a"><div className='mt-4' style={{fontSize: '2em'}}>Nhập hàng </div></Radio.Button>
+                                    <Radio.Button style={{height: 70, width: 170}} value="d"><div className='mt-4' style={{fontSize: '2em'}}>Xuất hàng </div></Radio.Button>
+                                </Radio.Group>
+                            </div>
+                        </div>
+
                         {/* <div className='flex justify-center mt-5'>
                             <Form.Item
                                 label="Nhà cung cấp"
@@ -259,16 +292,16 @@ const App = () => {
                             pagination={false}
                             dataSource={dataSource} columns={columns}
                             footer={() => <Button onClick={() => { setDataSource([...dataSource, { key: new Date().valueOf() }]); }} style={{ display: 'flex', alignItems: 'center' }} icon={<PlusCircleOutlined />} type='link'>Add more item </Button>}
-                            expandedRowKeys={expandedRowKeys}
-                            expandable={{
-                                expandedRowRender: record => <Package location={location} data={record} form={form} orderDetail={orderDetail} />,
-                                expandIcon: ({ expanded, onExpand, record }) =>
-                                    expanded ? (
-                                        <Button type='primary' onClick={(e) => _handleExpandItem(record, e)} >Close</Button>
-                                    ) : (
-                                        <Button onClick={(e) => _handleExpandItem(record, e)}>Chỉnh sửa package</Button>
-                                    ),
-                            }}
+                            // expandedRowKeys={expandedRowKeys}
+                            // expandable={{
+                            //     expandedRowRender: record => <Package location={location} data={record} form={form} orderDetail={orderDetail} />,
+                            //     expandIcon: ({ expanded, onExpand, record }) =>
+                            //         expanded ? (
+                            //             <Button type='primary' onClick={(e) => _handleExpandItem(record, e)} >Close</Button>
+                            //         ) : (
+                            //             <Button onClick={(e) => _handleExpandItem(record, e)}>Chỉnh sửa package</Button>
+                            //         ),
+                            // }}
 
                         /> : <Skeleton />}
 

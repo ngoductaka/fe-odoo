@@ -2,10 +2,7 @@ import { LogoutOutlined, DoubleRightOutlined, AppstoreOutlined } from '@ant-desi
 import { Layout, Menu } from 'antd';
 import { requestLogout } from 'app_state/login';
 // component
-import { images } from 'helper/static/images';
-import { get } from 'lodash';
 import React, { useEffect, useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import { Breadcrumbs } from './breadcrumbs';
@@ -13,8 +10,6 @@ import { Items } from './right_item_bar';
 import { Wrapper } from './styled';
 import styled from 'styled-components';
 import { LeftMenu } from './left_menu';
-
-
 
 const App = ({ children, title = '' }) => {
     const [collapsed, onCollapse] = React.useState(true);

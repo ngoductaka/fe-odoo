@@ -12,7 +12,7 @@ import { images } from "../../helper/static/images";
 import { requestLogin, isLoginSelector } from "../../app_state/login";
 import { ROUTES } from "../../_config/route";
 import { LanguageIcon } from "com/app_layout/general_header/right_item_bar";
-import { ODOO_PORT, ODOO_URL } from "_config/constant";
+import { ODOO_PORT, ODOO_URL, ODOO_DB } from "_config/constant";
 const login = "login";
 const { logo, bg } = images;
 
@@ -34,7 +34,7 @@ const SignInPage = (props) => {
                 password: pwd,
                 "port": ODOO_PORT,
                 "host": ODOO_URL,
-                "db": "cuulong"
+                "db": ODOO_DB,
             };
             setLoading(true);
             const result = await dispatch(requestLogin(body));
