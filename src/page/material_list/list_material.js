@@ -254,7 +254,7 @@ const App = () => {
                                 <h3 >Xuất nhập kho</h3>
                             </div>}
                         </div>
-                        <div className='flex justify-between items-center'>
+                        <div className='flex justify-between items-center my-5'>
                             <div className=''>
                                 <div className='mb-3 font-semibold text-lg' style={{ fontSize: '1.5em' }}> Chọn kho</div>
                                 <div>
