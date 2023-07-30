@@ -52,7 +52,7 @@ export const ROUTES = {
     INPUT: 'warehouse-input',
     ORDER: '물류 센터',
     OUT_STOCK: 'out-stock',
-    LAYOUT: '보고서',
+    LAYOUT: 'layout',
 
     STATISTIC: 'statistic',
     MACHINE_ANALYTIC: 'machine-analytic',
@@ -91,6 +91,20 @@ export const private_route = [
         exact: true,
         Icon: <DownOutlined />,
         name: 'Nhập Kho',
+    },
+    {
+        path: `/${ROUTES.LAYOUT}`,
+        Com: WarehouseLayout,
+        exact: true,
+        Icon: <GroupOutlined />,
+        name: 'Layout',
+    },
+    {
+        path: `/${ROUTES.TV_LINK}`,
+        Com: WarehouseLayout,
+        exact: true,
+        Icon: <GroupOutlined />,
+        name: 'Layout',
     },
     // {
     //     Com: MaterialList,
