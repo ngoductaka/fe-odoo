@@ -104,7 +104,7 @@ export const private_route = [
         path: `/${ROUTES.TV_LINK}`,
         Com: WorkList,
         exact: true,
-        Icon: <GroupOutlined />,
+        Icon: <FundProjectionScreenOutlined />,
         name: 'Lệnh sản xuất',
     },
     // {
