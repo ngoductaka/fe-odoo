@@ -41,6 +41,7 @@ const RfidMaterial = loadable(() => import('page/material-rfid'));
 const listOutStock = loadable(() => import('page/out-stock-list'));
 const order = loadable(() => import('page/order/list-order'));
 const Home = loadable(() => import('page/home'));
+const WorkList = loadable(() => import('page/work_list'));
 
 export const ROUTES = {
     // unAuth
@@ -101,10 +102,10 @@ export const private_route = [
     },
     {
         path: `/${ROUTES.TV_LINK}`,
-        Com: WarehouseLayout,
+        Com: WorkList,
         exact: true,
         Icon: <GroupOutlined />,
-        name: 'Layout',
+        name: 'Lệnh sản xuất',
     },
     // {
     //     Com: MaterialList,
